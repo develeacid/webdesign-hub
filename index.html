@@ -1,18 +1,220 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebDesign Hub — Galeria de Diseños Web</title>
-  <meta name="description" content="Coleccion de diseños web modernos con animaciones y transiciones.">
+  <title>WebDesign Hub — Galería de Diseños Web</title>
+  <meta name="description" content="Colección de diseños web modernos con animaciones y transiciones.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./dist/css/main.css">
+  <!-- Dark mode: aplicar antes del render para evitar flash -->
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
 </head>
-<body class="bg-zinc-950 text-white min-h-screen flex items-center justify-center">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold bg-gradient-to-r from-violet-600 to-pink-500 bg-clip-text text-transparent">
+<body class="dark:bg-hub-bg bg-hub-bg-light dark:text-hub-text text-hub-text-light font-body min-h-screen hub-bg-pattern">
+
+  <!-- NAV -->
+  <nav class="nav-blur fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between dark:bg-hub-bg/70 bg-hub-bg-light/70 border-b dark:border-white/5 border-black/5">
+    <a href="./index.html" class="text-xl font-extrabold gradient-text tracking-tight">
       WebDesign Hub
-    </h1>
-    <p class="mt-4 text-zinc-400">Proximamente — Coleccion de diseños web modernos</p>
-  </div>
+    </a>
+    <button
+      id="theme-toggle"
+      class="p-2.5 rounded-xl dark:bg-white/5 bg-black/5 dark:hover:bg-white/10 hover:bg-black/10 transition-all duration-300"
+      aria-label="Cambiar tema"
+    >
+      <!-- Sol (dark mode activo → click para light) -->
+      <svg class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+      </svg>
+      <!-- Luna (light mode activo → click para dark) -->
+      <svg class="w-5 h-5 block dark:hidden text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+      </svg>
+    </button>
+  </nav>
+
+  <main class="pt-24 px-6 max-w-7xl mx-auto" x-data="hub()">
+
+    <!-- HERO -->
+    <section class="relative py-24 md:py-32 text-center overflow-hidden">
+      <!-- Glow orb behind hero -->
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="relative z-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] dark:text-hub-muted text-hub-muted-light mb-6 hero-subtitle">Galería de diseño web</p>
+        <h1 class="hero-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight">
+          <span class="hero-line block">Colección de</span>
+          <span class="hero-line block gradient-text mt-2">Diseños Web</span>
+          <span class="hero-line block gradient-text">Modernos</span>
+        </h1>
+        <p class="hero-subtitle mt-8 text-lg md:text-xl dark:text-hub-muted text-hub-muted-light max-w-2xl mx-auto leading-relaxed">
+          Páginas completas con animaciones, transiciones y diseño visual avanzado.<br class="hidden sm:block">
+          Cada una es una experiencia standalone a pantalla completa.
+        </p>
+        <div class="hero-stats mt-10 flex items-center justify-center gap-8 text-sm dark:text-hub-muted text-hub-muted-light">
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold dark:text-white text-hub-text-light">9</span>
+            <span>páginas</span>
+          </div>
+          <div class="w-px h-8 dark:bg-white/10 bg-black/10"></div>
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold dark:text-white text-hub-text-light">5</span>
+            <span>librerías</span>
+          </div>
+          <div class="w-px h-8 dark:bg-white/10 bg-black/10"></div>
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold dark:text-white text-hub-text-light">∞</span>
+            <span>inspiración</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="gradient-divider max-w-md mx-auto my-4"></div>
+
+    <!-- FILTROS -->
+    <section class="py-10 flex flex-wrap justify-center gap-3">
+      <template x-for="cat in categories" :key="cat">
+        <button
+          @click="filter = cat"
+          :class="filter === cat
+            ? 'bg-gradient-to-r from-accent-violet to-accent-pink text-white filter-active'
+            : 'dark:bg-white/5 bg-black/5 dark:text-hub-muted text-hub-muted-light dark:hover:bg-white/10 hover:bg-black/10'"
+          class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300"
+          x-text="cat"
+        ></button>
+      </template>
+    </section>
+
+    <!-- GRID DE CARDS -->
+    <section class="py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <template x-for="page in filteredPages" :key="page.slug">
+        <a
+          :href="'./' + page.slug + '.html'"
+          target="_blank"
+          rel="noopener"
+          class="glass-card card-reveal group block overflow-hidden focus-visible:ring-2 focus-visible:ring-accent-violet focus-visible:outline-none"
+        >
+          <div class="card-img-wrapper aspect-video overflow-hidden" :class="page.texture">
+            <div class="w-full h-full flex items-center justify-center dark:text-white/20 text-black/20 text-sm font-medium tracking-wider uppercase">Preview</div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between">
+              <h3 class="text-lg font-bold group-hover:text-accent-violet transition-colors duration-300" x-text="page.title"></h3>
+              <span class="text-xs dark:text-white/20 text-black/20 group-hover:text-accent-violet transition-colors duration-300 mt-1">↗</span>
+            </div>
+            <p class="mt-2 text-sm dark:text-hub-muted text-hub-muted-light leading-relaxed" x-text="page.description"></p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <template x-for="tag in page.tags" :key="tag">
+                <span class="px-2.5 py-1 text-xs font-medium rounded-md dark:bg-white/5 bg-black/5 dark:text-hub-muted text-hub-muted-light" x-text="tag"></span>
+              </template>
+            </div>
+          </div>
+        </a>
+      </template>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="gradient-divider max-w-md mx-auto my-16"></div>
+
+    <!-- TECH STACK -->
+    <section class="py-16">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] dark:text-hub-muted text-hub-muted-light text-center mb-3">Construido con</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-14">Stack Tecnológico</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5 max-w-4xl mx-auto">
+        <div class="glass-card tech-card p-6 text-center">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl dark:bg-cyan-500/10 bg-cyan-500/10 flex items-center justify-center">
+            <span class="text-cyan-400 text-xl font-bold">Tw</span>
+          </div>
+          <h3 class="font-bold text-sm">Tailwind CSS</h3>
+          <p class="text-xs dark:text-hub-muted text-hub-muted-light mt-1">v4 · Utility-first</p>
+        </div>
+        <div class="glass-card tech-card p-6 text-center">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl dark:bg-green-500/10 bg-green-500/10 flex items-center justify-center">
+            <span class="text-green-400 text-xl font-bold">Gs</span>
+          </div>
+          <h3 class="font-bold text-sm">GSAP</h3>
+          <p class="text-xs dark:text-hub-muted text-hub-muted-light mt-1">3.x · Animaciones</p>
+        </div>
+        <div class="glass-card tech-card p-6 text-center">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl dark:bg-blue-500/10 bg-blue-500/10 flex items-center justify-center">
+            <span class="text-blue-400 text-xl font-bold">Le</span>
+          </div>
+          <h3 class="font-bold text-sm">Lenis</h3>
+          <p class="text-xs dark:text-hub-muted text-hub-muted-light mt-1">Smooth scroll</p>
+        </div>
+        <div class="glass-card tech-card p-6 text-center">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl dark:bg-purple-500/10 bg-purple-500/10 flex items-center justify-center">
+            <span class="text-purple-400 text-xl font-bold">Sw</span>
+          </div>
+          <h3 class="font-bold text-sm">Swiper</h3>
+          <p class="text-xs dark:text-hub-muted text-hub-muted-light mt-1">11.x · Carruseles</p>
+        </div>
+        <div class="glass-card tech-card p-6 text-center">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl dark:bg-amber-500/10 bg-amber-500/10 flex items-center justify-center">
+            <span class="text-amber-400 text-xl font-bold">Al</span>
+          </div>
+          <h3 class="font-bold text-sm">Alpine.js</h3>
+          <p class="text-xs dark:text-hub-muted text-hub-muted-light mt-1">3.x · Interactividad</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t dark:border-white/5 border-black/5 py-10 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm dark:text-hub-muted text-hub-muted-light">
+      <div class="flex items-center gap-2">
+        <span class="gradient-text font-bold">eleacid</span>
+        <span>· 2026</span>
+      </div>
+      <a href="https://develeacid.github.io/layouts-personales/" target="_blank" rel="noopener" class="dark:hover:text-white hover:text-hub-text-light transition-colors flex items-center gap-1">
+        Proyecto hermano: LayoutOS <span class="text-xs">↗</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+
+  <!-- Alpine.js data -->
+  <script>
+    function hub() {
+      return {
+        filter: 'Todos',
+        categories: ['Todos', 'Landing', 'Portfolio', 'E-commerce', 'Editorial', 'Gastronomía', 'Fitness', 'Startup', 'Eventos'],
+        pages: [
+          { slug: 'saas-landing', title: 'SaaS Landing', description: 'Página de producto con gradientes animados, pricing y testimonials.', category: 'Landing', tags: ['GSAP', 'Lenis'], texture: 'texture-saas' },
+          { slug: 'portfolio-creativo', title: 'Portfolio Creativo', description: 'Minimalista con tipografía grande, galería con hover effects y parallax.', category: 'Portfolio', tags: ['GSAP'], texture: 'texture-portfolio' },
+          { slug: 'agencia-digital', title: 'Agencia Digital', description: 'Bold y oscuro con horizontal scroll, case studies y contrastes fuertes.', category: 'Landing', tags: ['GSAP', 'Lenis'], texture: 'texture-agencia' },
+          { slug: 'ecommerce-store', title: 'E-commerce Store', description: 'Elegante y fotográfico con carrusel de productos y quick view.', category: 'E-commerce', tags: ['Swiper', 'GSAP'], texture: 'texture-ecommerce' },
+          { slug: 'blog-magazine', title: 'Blog / Magazine', description: 'Layout editorial asimétrico con tipografía serif y reading progress.', category: 'Editorial', tags: ['Lenis', 'GSAP'], texture: 'texture-blog' },
+          { slug: 'restaurante', title: 'Restaurante', description: 'Cálido y fotográfico con menú interactivo, galería y colores tierra.', category: 'Gastronomía', tags: ['GSAP', 'Swiper'], texture: 'texture-restaurante' },
+          { slug: 'fitness-wellness', title: 'Fitness / Wellness', description: 'Energético con counters animados, video de fondo y tipografía bold.', category: 'Fitness', tags: ['GSAP'], texture: 'texture-fitness' },
+          { slug: 'startup-coming-soon', title: 'Startup Coming Soon', description: 'Minimalista con countdown animado, gradiente de fondo y email capture.', category: 'Startup', tags: ['GSAP'], texture: 'texture-startup' },
+          { slug: 'evento-conferencia', title: 'Evento / Conferencia', description: 'Vibrante con glassmorphism, timeline animada y speakers carousel.', category: 'Eventos', tags: ['GSAP', 'Swiper'], texture: 'texture-evento' }
+        ],
+        get filteredPages() {
+          if (this.filter === 'Todos') return this.pages;
+          return this.pages.filter(p => p.category === this.filter);
+        }
+      }
+    }
+  </script>
+
+  <!-- Hub JS -->
+  <script src="./src/js/hub.js"></script>
+
 </body>
 </html>

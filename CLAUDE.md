@@ -4,50 +4,56 @@
 Galeria visual de diseños web modernos con animaciones y transiciones. Proyecto hermano de [LayoutOS](https://develeacid.github.io/layouts-personales/). Cada entrada es una pagina web completa standalone a pantalla completa, organizada por tipo de industria.
 
 ## Stack
-- **Tailwind CSS v4** — estilos (unico que requiere build: `npm run build`)
-- **GSAP 3.x** — animaciones, scroll triggers, timelines (CDN)
+- **Tailwind CSS v4** — estilos con `@theme` y `@custom-variant` (unico que requiere build: `npm run build`)
+- **GSAP 3.x + ScrollTrigger** — animaciones, scroll triggers, timelines (CDN)
 - **Lenis** — smooth scroll (CDN)
-- **Splitting.js** — animaciones de texto (CDN)
 - **Swiper 11.x** — carruseles (CDN)
 - **Alpine.js 3.x** — interactividad ligera (CDN)
 
-Sin bundler. Sin transpiler. Solo Tailwind requiere build.
+Sin bundler. Sin transpiler. Sin Splitting.js (text split con vanilla JS). Solo Tailwind requiere build.
 
-## Stitch (Google AI Design)
-MCP server configurado a nivel user para generar diseños con IA.
-- Usar para generar layouts de referencia antes de implementar cada pagina
-- Herramientas: create_project, generate_screen_from_text, edit_screens, generate_variants
-- Modelos: GEMINI_3_FLASH, GEMINI_3_1_PRO
+## Skills para diseño
+En lugar de Stitch MCP, usar skills de Claude Code para cada pagina:
+1. `brainstorming` — explorar direccion visual antes de implementar
+2. `frontend-design` — generar paginas con alto nivel de diseño
+3. `verification-before-completion` — validar antes de commit
+4. `dispatching-parallel-agents` / `subagent-driven-development` — paralelizar paginas
 
 ## Estructura
 ```
 index.html              ← Hub/galeria principal (dark by default)
-src/pages/NOMBRE/       ← Cada pagina es un index.html standalone
-src/css/main.css        ← Tailwind source
+*.html                  ← Paginas standalone en raiz (rutas planas)
+src/css/main.css        ← Tailwind source con @theme
 src/js/hub.js           ← Logica del hub
-public/css/main.css     ← Tailwind compilado
-public/img/             ← Screenshots de preview
+dist/css/main.css       ← Tailwind compilado
+assets/img/             ← Screenshots de preview
 ```
 
 ## Comandos
 ```bash
-npm run build           # Compilar Tailwind
+npm run build           # Compilar Tailwind (minificado)
+npm run dev             # Tailwind en modo watch
 ```
 
 ## Reglas
-- **Rutas relativas** siempre (./src/, ../public/) — para GitHub Pages
+- **HTMLs en raiz** — rutas planas, siempre `./dist/css/main.css`
 - **Sin botones de descarga/copia** — es puramente visual
-- **Cada pagina es independiente** — su propio HTML, sus propios CDNs
+- **Cada pagina es independiente** — su propio HTML, solo sus CDNs necesarios
 - **Mobile first** — todo debe funcionar en movil
 - **Commits frecuentes** — uno por pagina completada
-- **Dark mode** solo en el hub, las paginas individuales tienen su propia paleta
-- **Cada pagina incluye boton "Volver al hub"** discreto
+- **Dark mode** solo en el hub (clase `.dark` en `<html>` + localStorage)
+- **Floating button "Volver al hub"** en cada pagina (esquina inferior izquierda)
+- **`prefers-reduced-motion`** — respetado en todas las paginas
+- **Links externos** con `target="_blank" rel="noopener"`
+- **Imagenes** via Unsplash con `?w=800&q=80`
+- **Max 3-4 items** por seccion repetible (productos, articulos, case studies)
 
 ## Branding del Hub
-- Fondo: zinc-950 (dark by default)
-- Acento: gradiente violeta-rosa (from-violet-600 to-pink-500)
-- Cards: glassmorphism (bg-white/5 backdrop-blur border-white/10)
-- Hover: scale + shadow + border glow
+- Fondo: zinc-950 con dot grid sutil + hero glow orb
+- Acento: gradiente violeta-rosa (#7c3aed → #ec4899)
+- Cards: glassmorphism + texturas unicas por pagina
+- Hover: scale(1.02) + shadow + border glow violeta
+- Dark/light mode con transicion suave (0.4s)
 
 ## Deploy
 GitHub Pages desde branch main, directorio raiz.

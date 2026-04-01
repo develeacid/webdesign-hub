@@ -1,9 +1,269 @@
 @import "tailwindcss";
 
+/* Dark mode manual via clase .dark en <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
+  /* Tipografia */
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Colores base */
   --color-hub-bg: #09090b;
-  --color-hub-card: rgba(255, 255, 255, 0.05);
-  --color-hub-border: rgba(255, 255, 255, 0.1);
+  --color-hub-bg-light: #fafafa;
+  --color-hub-surface: #18181b;
+  --color-hub-surface-light: #ffffff;
+  --color-hub-muted: #a1a1aa;
+  --color-hub-muted-light: #71717a;
+  --color-hub-text: #fafafa;
+  --color-hub-text-light: #09090b;
+
+  /* Accent gradient endpoints */
   --color-accent-violet: #7c3aed;
   --color-accent-pink: #ec4899;
+
+  /* Glassmorphism tokens */
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-bg-light: rgba(255, 255, 255, 0.8);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-light: rgba(0, 0, 0, 0.08);
 }
+
+/* Glassmorphism card */
+.glass-card {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+}
+
+.dark .glass-card {
+  background: var(--color-glass-bg);
+  border-color: var(--color-glass-border);
+}
+
+:not(.dark) .glass-card {
+  background: var(--color-glass-bg-light);
+  border-color: var(--color-glass-border-light);
+}
+
+.glass-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(124, 58, 237, 0.15);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+:not(.dark) .glass-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 30px rgba(124, 58, 237, 0.08);
+}
+
+/* Transicion suave de dark mode */
+body, nav, footer {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Grid pattern de fondo (dot grid sutil) */
+.hub-bg-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+:not(.dark) .hub-bg-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0);
+}
+
+/* Hero glow orb */
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(236, 72, 153, 0.08) 40%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:not(.dark) .hero-glow {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, rgba(236, 72, 153, 0.04) 40%, transparent 70%);
+}
+
+/* Card image hover zoom */
+.card-img-wrapper img,
+.card-img-wrapper > div {
+  transition: transform 0.5s ease-out;
+}
+.glass-card:hover .card-img-wrapper img,
+.glass-card:hover .card-img-wrapper > div {
+  transform: scale(1.05);
+}
+
+/* Nav blur intenso */
+.nav-blur {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* Staggered card reveal (GSAP targets) */
+.card-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Filter pill active glow */
+.filter-active {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+
+/* Tech stack card hover */
+.tech-card {
+  transition: transform 0.3s ease-out, border-color 0.3s ease-out;
+}
+.tech-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Divider line with gradient */
+.gradient-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), rgba(236, 72, 153, 0.3), transparent);
+}
+
+/* ── Card Preview Textures ─────────────────────────────── */
+
+/* SaaS: grid de circuitos / nodos tech */
+.texture-saas {
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+    linear-gradient(rgba(96, 165, 250, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+}
+
+/* Portfolio: lineas diagonales minimalistas */
+.texture-portfolio {
+  background-color: #18181b;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(255, 255, 255, 0.03) 20px,
+      rgba(255, 255, 255, 0.03) 21px
+    ),
+    radial-gradient(ellipse at 70% 40%, rgba(161, 161, 170, 0.08) 0%, transparent 60%);
+}
+
+/* Agencia: bloques geometricos bold */
+.texture-agencia {
+  background-color: #0c0a1a;
+  background-image:
+    linear-gradient(135deg, rgba(168, 85, 247, 0.1) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(99, 102, 241, 0.08) 25%, transparent 25%),
+    radial-gradient(circle at 30% 60%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
+}
+
+/* E-commerce: patron de tela / luxury dots */
+.texture-ecommerce {
+  background-color: #1c1917;
+  background-image:
+    radial-gradient(circle, rgba(251, 191, 36, 0.08) 1px, transparent 1px),
+    radial-gradient(circle, rgba(251, 191, 36, 0.05) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 50%, rgba(244, 63, 94, 0.06) 0%, transparent 70%);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+  background-position: 0 0, 10px 10px, 0 0;
+}
+
+/* Blog: lineas horizontales tipo editorial */
+.texture-blog {
+  background-color: #0f1f1a;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(52, 211, 153, 0.05) 24px,
+      rgba(52, 211, 153, 0.05) 25px
+    ),
+    radial-gradient(ellipse at 20% 80%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+}
+
+/* Restaurante: textura calida organica */
+.texture-restaurante {
+  background-color: #1a1207;
+  background-image:
+    radial-gradient(ellipse at 30% 50%, rgba(251, 146, 60, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(234, 179, 8, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(251, 146, 60, 0.06) 2px, transparent 2px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+}
+
+/* Fitness: lineas energeticas diagonales */
+.texture-fitness {
+  background-color: #0a1a0f;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 30px,
+      rgba(34, 197, 94, 0.06) 30px,
+      rgba(34, 197, 94, 0.06) 31px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 30px,
+      rgba(163, 230, 53, 0.04) 30px,
+      rgba(163, 230, 53, 0.04) 31px
+    ),
+    radial-gradient(circle at 70% 30%, rgba(34, 197, 94, 0.1) 0%, transparent 50%);
+}
+
+/* Startup: gradiente animado con noise */
+.texture-startup {
+  background-color: #0d0520;
+  background-image:
+    radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(217, 70, 239, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 8px 8px;
+}
+
+/* Evento: glassmorphism + formas vibrantes */
+.texture-evento {
+  background-color: #071525;
+  background-image:
+    radial-gradient(circle at 20% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 60%),
+    linear-gradient(rgba(6, 182, 212, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Light mode overrides para texturas */
+:not(.dark) .texture-saas { background-color: #eff6ff; background-image: radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%), linear-gradient(rgba(96, 165, 250, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(96, 165, 250, 0.08) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px; }
+:not(.dark) .texture-portfolio { background-color: #f4f4f5; background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(0,0,0,0.03) 20px, rgba(0,0,0,0.03) 21px), radial-gradient(ellipse at 70% 40%, rgba(0,0,0,0.04) 0%, transparent 60%); }
+:not(.dark) .texture-agencia { background-color: #f0edff; background-image: linear-gradient(135deg, rgba(168,85,247,0.08) 25%, transparent 25%), linear-gradient(225deg, rgba(99,102,241,0.06) 25%, transparent 25%), radial-gradient(circle at 30% 60%, rgba(168,85,247,0.06) 0%, transparent 40%), radial-gradient(circle at 80% 20%, rgba(99,102,241,0.05) 0%, transparent 40%); }
+:not(.dark) .texture-ecommerce { background-color: #fef9f0; background-image: radial-gradient(circle, rgba(180,130,20,0.06) 1px, transparent 1px), radial-gradient(circle, rgba(180,130,20,0.04) 1px, transparent 1px), radial-gradient(ellipse at 50% 50%, rgba(200,50,70,0.04) 0%, transparent 70%); background-size: 20px 20px, 20px 20px, 100% 100%; background-position: 0 0, 10px 10px, 0 0; }
+:not(.dark) .texture-blog { background-color: #f0fdf7; background-image: repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(16,150,100,0.06) 24px, rgba(16,150,100,0.06) 25px), radial-gradient(ellipse at 20% 80%, rgba(20,184,166,0.06) 0%, transparent 50%); }
+:not(.dark) .texture-restaurante { background-color: #fff8ed; background-image: radial-gradient(ellipse at 30% 50%, rgba(234,130,40,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(200,150,10,0.06) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(234,130,40,0.04) 2px, transparent 2px); background-size: 100% 100%, 100% 100%, 24px 24px; }
+:not(.dark) .texture-fitness { background-color: #f0fdf4; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(22,163,74,0.06) 30px, rgba(22,163,74,0.06) 31px), repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(132,204,22,0.04) 30px, rgba(132,204,22,0.04) 31px), radial-gradient(circle at 70% 30%, rgba(22,163,74,0.06) 0%, transparent 50%); }
+:not(.dark) .texture-startup { background-color: #f5f0ff; background-image: radial-gradient(circle at 30% 40%, rgba(139,92,246,0.1) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(217,70,239,0.08) 0%, transparent 40%), radial-gradient(circle at 50% 50%, rgba(124,58,237,0.04) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 8px 8px; }
+:not(.dark) .texture-evento { background-color: #f0f9ff; background-image: radial-gradient(circle at 20% 70%, rgba(6,182,212,0.08) 0%, transparent 40%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.08) 0%, transparent 40%), radial-gradient(circle at 50% 50%, rgba(6,182,212,0.06) 0%, transparent 60%), linear-gradient(rgba(6,182,212,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.05) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px; }

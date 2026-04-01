@@ -214,50 +214,70 @@ En lugar de un boton estatico en la esquina que rompe el diseño de cada pagina,
 
 ## Fases de Implementacion
 
-### Fase 1: Scaffolding
+### Fase 1: Scaffolding ✅
 1. ~~Crear directorio y repo `webdesign-hub`~~ ✅
-2. `npm init -y`
-3. Instalar Tailwind CSS v4
-4. Crear `src/css/main.css` con `@theme` (config de Tailwind v4 via CSS)
-5. Crear estructura de carpetas (`dist/`, `assets/img/`, `assets/fonts/`, `src/js/`)
-6. Build inicial de Tailwind (`npm run build`)
-7. Crear script de captura de screenshots (`capture.js` con puppeteer)
-8. Deploy inicial a GitHub Pages (pagina vacia)
+2. ~~`npm init -y`~~ ✅
+3. ~~Instalar Tailwind CSS v4~~ ✅
+4. ~~Crear `src/css/main.css` con `@theme`~~ ✅
+5. ~~Crear estructura de carpetas~~ ✅
+6. ~~Build inicial de Tailwind~~ ✅
+7. ~~Commit inicial~~ ✅
 
-### Fase 2: Hub Principal
-9. Crear `index.html` con layout base (nav, hero, grid, footer)
-10. Implementar hero con animacion de texto (JS vanilla split + GSAP)
-11. Implementar grid de cards con datos hardcodeados
-12. Implementar filtros con Alpine.js
-13. Fondo con grid pattern sutil (dot grid sobre zinc-950)
-14. Smooth scroll con Lenis + respeto a `prefers-reduced-motion`
-15. Responsive design (mobile first)
-16. Cards con screenshots placeholder (gradientes de color hasta tener las paginas)
-17. Links con `target="_blank" rel="noopener"` e icono ↗
+### Fase 2: Branding & Foundations ✅ (diseñar en codigo, no en Figma)
 
-### Fase 3: Paginas (1 por 1, orden sugerido)
-18. P08 — Startup Coming Soon (la mas simple, buen warmup — solo GSAP)
-19. P01 — SaaS Landing (patron mas comun, establece base — GSAP + Lenis)
-20. P02 — Portfolio Creativo (text split vanilla + GSAP)
-21. P06 — Restaurante (introduce Swiper — GSAP + Swiper)
-22. P03 — Agencia Digital (introduce horizontal scroll — GSAP + Lenis)
-23. P05 — Blog / Magazine (layout editorial — Lenis + GSAP)
-24. P07 — Fitness / Wellness (counters, video — GSAP)
-25. P04 — E-commerce Storefront (grid complejo — Swiper + GSAP)
-26. P09 — Evento / Conferencia (glassmorphism, timeline — GSAP + Swiper)
+**Principio:** El `index.html` ES el Figma. Tokens → Layout → Card → Atmosfera → Interactividad.
+
+- ~~Tokens en `@theme`: tipografia, colores, dark mode, glassmorphism~~ ✅
+- ~~Layout esqueletico mobile first: nav, hero, grid, tech stack, footer~~ ✅
+- ~~Componente Card: texturas unicas, hover, a11y, dark/light mode~~ ✅
+- ~~Atmosfera: hero glow, grid pattern, gradient dividers, GSAP animations~~ ✅
+- ~~Interactividad: dark mode toggle + localStorage, Lenis, filtros Alpine, prefers-reduced-motion~~ ✅
+
+### Fase 3: Paginas Standalone (Skills-Driven)
+
+**Skills utilizados por pagina:**
+1. `brainstorming` — explorar direccion visual y decisiones de diseño
+2. `frontend-design` — generar la pagina completa con alto nivel de diseño
+3. `verification-before-completion` — validar responsive, a11y, animaciones
+4. Commit
+
+**Workflow por pagina:**
+1. Invocar `brainstorming` para definir paleta, layout, secciones clave
+2. Invocar `frontend-design` para implementar la pagina completa
+3. Añadir boton flotante "Volver al hub"
+4. Inyectar solo los CDNs necesarios
+5. Escribir animaciones GSAP/ScrollTrigger
+6. Invocar `verification-before-completion` para validar
+7. Commit
+
+**Paralelizacion (opcional):**
+- Usar `dispatching-parallel-agents` para ejecutar 2-3 paginas simultaneamente
+- Usar `subagent-driven-development` para despachar agentes por pagina
+
+Orden (menor a mayor complejidad):
+29. P08 — Startup Coming Soon (1 seccion centrada — solo GSAP)
+30. P01 — SaaS Landing (layout estandar — GSAP + Lenis)
+31. P02 — Portfolio Creativo (espacio blanco, text split — GSAP)
+32. P06 — Restaurante (tipografia elegante — GSAP + Swiper)
+33. P03 — Agencia Digital (dark bold, horizontal scroll — GSAP + Lenis)
+34. P05 — Blog / Magazine (layout editorial asimetrico — Lenis + GSAP)
+35. P07 — Fitness / Wellness (counters, video — GSAP)
+36. P04 — E-commerce Storefront (grid productos, quick-view — Swiper + GSAP)
+37. P09 — Evento / Conferencia (glassmorphism, timeline — GSAP + Swiper)
 
 Cada pagina incluye:
 - Solo los CDNs que necesita
 - Floating button "Volver al hub"
 - Respeto a `prefers-reduced-motion`
-- Imagenes de Unsplash con parametros de tamaño
+- Imagenes de Unsplash con `?w=800&q=80`
 
-### Fase 4: Polish
-27. Ejecutar `npm run capture` para screenshots automaticos
-28. Optimizar imagenes (compression)
-29. Meta tags y SEO basico
-30. Performance audit (Lighthouse)
-31. Deploy final
+### Fase 4: Polish & Conexion Final
+38. Ejecutar script Puppeteer para screenshots reales
+39. Reemplazar placeholders del Hub con imagenes reales
+40. Auditoria `prefers-reduced-motion` en hub y cada pagina
+41. SEO basico (meta tags, Open Graph)
+42. Performance audit (Lighthouse)
+43. Deploy final a GitHub Pages
 
 ---
 
