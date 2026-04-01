@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metrix — Real-time Analytics for Modern Teams</title>
+  <meta name="description" content="Analytics that move as fast as you. Real-time insights, custom dashboards, team collaboration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/css/main.css">
+  <style>
+    :root {
+      --mx-bg: #fafbff;
+      --mx-surface: #ffffff;
+      --mx-text: #0f172a;
+      --mx-muted: #64748b;
+      --mx-light: #94a3b8;
+      --mx-indigo: #6366f1;
+      --mx-violet: #8b5cf6;
+      --mx-cyan: #06b6d4;
+      --mx-border: rgba(99, 102, 241, 0.08);
+      --mx-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 32px rgba(99, 102, 241, 0.06);
+      --mx-shadow-lg: 0 4px 12px rgba(15, 23, 42, 0.04), 0 24px 64px rgba(99, 102, 241, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--mx-bg);
+      color: var(--mx-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
+
+    /* ── Noise texture overlay ─────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.015;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Section spacing ───────────────────── */
+    section { padding: 6rem 1.5rem; }
+    @media (min-width: 768px) { section { padding: 8rem 2rem; } }
+    .container { max-width: 1120px; margin: 0 auto; }
+
+    /* ── Nav ────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(250, 251, 255, 0.8);
+      border-bottom: 1px solid var(--mx-border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--mx-text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet));
+    }
+
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+
+    .nav-links a {
+      color: var(--mx-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--mx-text); }
+
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      background: var(--mx-text);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── Hero ───────────────────────────────── */
+    .hero {
+      padding-top: 10rem;
+      padding-bottom: 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 1rem;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+      border: 1px solid var(--mx-border);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--mx-indigo);
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .hero h1 {
+      margin-top: 1.75rem;
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--mx-text);
+    }
+
+    .hero h1 .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      color: var(--mx-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-buttons {
+      margin-top: 2.25rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .btn-primary {
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet));
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 28px rgba(99, 102, 241, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      padding: 0.8rem 2rem;
+      background: var(--mx-surface);
+      color: var(--mx-text);
+      border: 1px solid var(--mx-border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(99, 102, 241, 0.2);
+      box-shadow: var(--mx-shadow);
+    }
+
+    /* Stats */
+    .hero-stats {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--mx-light);
+      margin-top: 0.25rem;
+    }
+
+    /* ── Dashboard mockup ──────────────────── */
+    .dashboard-wrapper {
+      margin-top: 4rem;
+      position: relative;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      transform: translateY(60px);
+    }
+
+    .dashboard-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.06), transparent 70%);
+      filter: blur(40px);
+      z-index: 0;
+      border-radius: 40px;
+    }
+
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      background: var(--mx-surface);
+      border-radius: 16px;
+      border: 1px solid var(--mx-border);
+      box-shadow: var(--mx-shadow-lg);
+      overflow: hidden;
+    }
+
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      background: rgba(250, 251, 255, 0.6);
+    }
+
+    .dash-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dash-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dash-dots span:nth-child(1) { background: #f87171; }
+    .dash-dots span:nth-child(2) { background: #fbbf24; }
+    .dash-dots span:nth-child(3) { background: #34d399; }
+
+    .dash-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--mx-muted);
+    }
+
+    .dash-body {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .dash-body { grid-template-columns: 1fr; padding: 1rem; }
+    }
+
+    .dash-metric {
+      padding: 1rem;
+      border-radius: 10px;
+      background: var(--mx-bg);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .dash-metric-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--mx-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .dash-metric-value {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--mx-text);
+      margin-top: 0.25rem;
+    }
+
+    .dash-metric-change {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #10b981;
+      margin-top: 0.25rem;
+    }
+
+    .dash-metric-change.down { color: #f87171; }
+
+    /* Bar chart */
+    .dash-chart {
+      grid-column: 1 / -1;
+      padding: 1rem;
+      border-radius: 10px;
+      background: var(--mx-bg);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .dash-chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .dash-chart-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--mx-muted);
+    }
+
+    .dash-chart-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #10b981;
+      padding: 0.2rem 0.5rem;
+      background: rgba(16, 185, 129, 0.08);
+      border-radius: 4px;
+    }
+
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 80px;
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      min-width: 0;
+      transition: height 0.6s ease;
+    }
+
+    .bar-indigo { background: linear-gradient(180deg, var(--mx-indigo), var(--mx-violet)); opacity: 0.85; }
+    .bar-cyan { background: var(--mx-cyan); opacity: 0.4; }
+
+    .bars-labels {
+      display: flex;
+      gap: 6px;
+      margin-top: 0.5rem;
+    }
+
+    .bars-labels span {
+      flex: 1;
+      font-size: 0.55rem;
+      color: var(--mx-light);
+      text-align: center;
+    }
+
+    /* ── Features ───────────────────────────── */
+    .features { background: var(--mx-surface); }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--mx-indigo);
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-top: 0.75rem;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--mx-muted);
+      margin-top: 1rem;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      border-radius: 14px;
+      border: 1px solid var(--mx-border);
+      background: var(--mx-bg);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--mx-shadow-lg);
+      border-color: rgba(99, 102, 241, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .feature-icon-indigo { background: rgba(99, 102, 241, 0.08); }
+    .feature-icon-violet { background: rgba(139, 92, 246, 0.08); }
+    .feature-icon-cyan { background: rgba(6, 182, 212, 0.08); }
+
+    .feature-card h3 {
+      margin-top: 1.25rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      margin-top: 0.625rem;
+      font-size: 0.9rem;
+      color: var(--mx-muted);
+      line-height: 1.65;
+    }
+
+    /* ── Pricing ────────────────────────────── */
+    .pricing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .pricing-toggle span {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mx-muted);
+    }
+
+    .pricing-toggle span.active { color: var(--mx-text); font-weight: 600; }
+
+    .toggle-switch {
+      width: 48px;
+      height: 26px;
+      background: var(--mx-border);
+      border-radius: 100px;
+      cursor: pointer;
+      position: relative;
+      border: none;
+      transition: background 0.3s;
+    }
+
+    .toggle-switch.on { background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet)); }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .toggle-switch.on::after { transform: translateX(22px); }
+
+    .save-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .save-badge.visible { opacity: 1; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+      max-width: 920px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-card {
+      padding: 2rem;
+      border-radius: 14px;
+      border: 1px solid var(--mx-border);
+      background: var(--mx-surface);
+      position: relative;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .pricing-card:hover {
+      box-shadow: var(--mx-shadow);
+    }
+
+    .pricing-card.featured {
+      border-color: transparent;
+      background: linear-gradient(var(--mx-surface), var(--mx-surface)) padding-box,
+                  linear-gradient(135deg, var(--mx-indigo), var(--mx-violet)) border-box;
+      border: 2px solid transparent;
+      box-shadow: var(--mx-shadow-lg);
+    }
+
+    .pricing-popular {
+      position: absolute;
+      top: -10px;
+      right: 1.5rem;
+      padding: 0.2rem 0.75rem;
+      background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet));
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+
+    .pricing-plan {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--mx-muted);
+    }
+
+    .pricing-price {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .pricing-amount {
+      font-family: 'Sora', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pricing-period {
+      font-size: 0.875rem;
+      color: var(--mx-muted);
+    }
+
+    .pricing-desc {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--mx-muted);
+      line-height: 1.5;
+    }
+
+    .pricing-features {
+      margin-top: 1.5rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .pricing-features li {
+      font-size: 0.85rem;
+      color: var(--mx-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pricing-features li::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.1);
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981' width='12' height='12'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 11px;
+    }
+
+    .pricing-card .btn-primary,
+    .pricing-card .btn-secondary {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    /* ── Testimonials ──────────────────────── */
+    .testimonials { background: var(--mx-surface); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .testimonial-card {
+      padding: 1.75rem;
+      border-radius: 14px;
+      border: 1px solid var(--mx-border);
+      background: var(--mx-bg);
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    .testimonial-card:nth-child(2) { transform: translateY(20px); }
+    .testimonial-card:nth-child(3) { transform: translateX(20px); }
+
+    .testimonial-quote {
+      font-size: 0.925rem;
+      color: var(--mx-text);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      margin-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.775rem;
+      color: var(--mx-light);
+    }
+
+    /* ── CTA ────────────────────────────────── */
+    .cta-section {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(139, 92, 246, 0.06));
+      border-radius: 24px;
+      z-index: 0;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .cta-section p {
+      margin-top: 1rem;
+      color: var(--mx-muted);
+      line-height: 1.7;
+    }
+
+    .cta-section .btn-primary {
+      margin-top: 2rem;
+      display: inline-flex;
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+    }
+
+    /* ── Footer ─────────────────────────────── */
+    .footer {
+      padding: 3rem 1.5rem;
+      border-top: 1px solid var(--mx-border);
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner { flex-direction: row; justify-content: space-between; }
+    }
+
+    .footer-brand {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--mx-text);
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--mx-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--mx-text); }
+
+    .footer-copy {
+      font-size: 0.775rem;
+      color: var(--mx-light);
+    }
+
+    /* ── Back to hub ───────────────────────── */
+    .back-hub {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--mx-border);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--mx-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      opacity: 0;
+      box-shadow: var(--mx-shadow);
+    }
+
+    .back-hub:hover {
+      color: var(--mx-text);
+      border-color: rgba(99, 102, 241, 0.15);
+    }
+
+    .back-hub svg { width: 16px; height: 16px; }
+
+    /* ── Reduced motion ────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-badge, .hero h1 .word, .hero-sub, .hero-buttons, .hero-stats,
+      .dashboard-wrapper, .feature-card, .pricing-card, .testimonial-card,
+      .cta-inner, .back-hub {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .bar { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><span class="nav-logo-dot"></span> Metrix</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+      </ul>
+      <a href="#" class="nav-cta">Get started</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">✨ Now with AI-powered insights</div>
+
+      <h1>
+        <span class="word">Analytics</span>
+        <span class="word">that</span>
+        <span class="word">move</span>
+        <span class="word">as</span>
+        <span class="word">fast</span>
+        <span class="word">as</span>
+        <span class="word">you</span>
+      </h1>
+
+      <p class="hero-sub">Track every metric that matters. Build custom dashboards in seconds. Share insights with your team in real-time.</p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Start free trial</a>
+        <a href="#" class="btn-secondary">See a demo →</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">10K+</div>
+          <div class="hero-stat-label">Teams</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">99.9%</div>
+          <div class="hero-stat-label">Uptime</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">&lt;50ms</div>
+          <div class="hero-stat-label">Latency</div>
+        </div>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div class="dashboard-wrapper">
+        <div class="dashboard-glow" aria-hidden="true"></div>
+        <div class="dashboard">
+          <div class="dash-topbar">
+            <div class="dash-dots"><span></span><span></span><span></span></div>
+            <span class="dash-title">Metrix Dashboard</span>
+            <div style="width: 42px;"></div>
+          </div>
+          <div class="dash-body">
+            <div class="dash-metric">
+              <div class="dash-metric-label">Monthly Revenue</div>
+              <div class="dash-metric-value">$48.2K</div>
+              <div class="dash-metric-change">↑ 12.5% vs last month</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Active Users</div>
+              <div class="dash-metric-value">2,847</div>
+              <div class="dash-metric-change">↑ 8.3% vs last month</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Bounce Rate</div>
+              <div class="dash-metric-value">24.1%</div>
+              <div class="dash-metric-change down">↓ 3.2% vs last month</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Avg. Session</div>
+              <div class="dash-metric-value">4m 32s</div>
+              <div class="dash-metric-change">↑ 18.7% vs last month</div>
+            </div>
+            <div class="dash-chart">
+              <div class="dash-chart-header">
+                <span class="dash-chart-title">Visitors — Last 12 months</span>
+                <span class="dash-chart-badge">+24% YoY</span>
+              </div>
+              <div class="bars">
+                <div class="bar bar-indigo" style="height:35%"></div>
+                <div class="bar bar-cyan" style="height:28%"></div>
+                <div class="bar bar-indigo" style="height:42%"></div>
+                <div class="bar bar-cyan" style="height:38%"></div>
+                <div class="bar bar-indigo" style="height:55%"></div>
+                <div class="bar bar-cyan" style="height:45%"></div>
+                <div class="bar bar-indigo" style="height:48%"></div>
+                <div class="bar bar-cyan" style="height:52%"></div>
+                <div class="bar bar-indigo" style="height:65%"></div>
+                <div class="bar bar-cyan" style="height:58%"></div>
+                <div class="bar bar-indigo" style="height:78%"></div>
+                <div class="bar bar-cyan" style="height:72%"></div>
+                <div class="bar bar-indigo" style="height:70%"></div>
+                <div class="bar bar-cyan" style="height:85%"></div>
+                <div class="bar bar-indigo" style="height:80%"></div>
+                <div class="bar bar-cyan" style="height:75%"></div>
+                <div class="bar bar-indigo" style="height:92%"></div>
+                <div class="bar bar-cyan" style="height:88%"></div>
+                <div class="bar bar-indigo" style="height:85%"></div>
+                <div class="bar bar-cyan" style="height:90%"></div>
+                <div class="bar bar-indigo" style="height:95%"></div>
+                <div class="bar bar-cyan" style="height:82%"></div>
+                <div class="bar bar-indigo" style="height:100%"></div>
+                <div class="bar bar-cyan" style="height:92%"></div>
+              </div>
+              <div class="bars-labels">
+                <span>Jan</span><span></span><span>Mar</span><span></span><span>May</span><span></span>
+                <span>Jul</span><span></span><span>Sep</span><span></span><span>Nov</span><span></span>
+                <span>Jan</span><span></span><span>Mar</span><span></span><span>May</span><span></span>
+                <span>Jul</span><span></span><span>Sep</span><span></span><span>Nov</span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything you need to<br>understand your data</h2>
+      <p class="section-sub">Built for teams who ship fast and make decisions with data, not guesswork.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-indigo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Real-time data</h3>
+          <p>See every click, pageview, and conversion the moment it happens. Sub-50ms latency across all regions.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-violet">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3>Custom dashboards</h3>
+          <p>Drag-and-drop widgets. Pin the metrics that matter. Create unlimited views for every team and stakeholder.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Team sharing</h3>
+          <p>Share dashboards with a link. Set granular permissions. Get Slack alerts when metrics cross thresholds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-sub">Start free, scale when you're ready. No credit card required.</p>
+
+      <div class="pricing-toggle">
+        <span class="monthly-label active">Monthly</span>
+        <button class="toggle-switch" id="billing-toggle" aria-label="Toggle annual billing"></button>
+        <span class="annual-label">Annual</span>
+        <span class="save-badge">Save 20%</span>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-plan">Free</div>
+          <div class="pricing-price">
+            <span class="pricing-amount">$0</span>
+            <span class="pricing-period">/ mo</span>
+          </div>
+          <p class="pricing-desc">For individuals exploring analytics.</p>
+          <ul class="pricing-features">
+            <li>1 dashboard</li>
+            <li>1K events / month</li>
+            <li>7-day data retention</li>
+            <li>Community support</li>
+          </ul>
+          <a href="#" class="btn-secondary">Get started</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-popular">Most popular</div>
+          <div class="pricing-plan">Pro</div>
+          <div class="pricing-price">
+            <span class="pricing-amount" data-monthly="29" data-annual="23">$29</span>
+            <span class="pricing-period">/ mo</span>
+          </div>
+          <p class="pricing-desc">For growing teams who need more.</p>
+          <ul class="pricing-features">
+            <li>Unlimited dashboards</li>
+            <li>100K events / month</li>
+            <li>12-month retention</li>
+            <li>AI-powered insights</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn-primary">Start free trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-plan">Team</div>
+          <div class="pricing-price">
+            <span class="pricing-amount" data-monthly="79" data-annual="63">$79</span>
+            <span class="pricing-period">/ mo</span>
+          </div>
+          <p class="pricing-desc">For organizations at scale.</p>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>Unlimited events</li>
+            <li>Unlimited retention</li>
+            <li>SSO & audit logs</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="#" class="btn-secondary">Contact sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Loved by data-driven teams</h2>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"We switched from Google Analytics and never looked back. The real-time dashboard is a game changer for our marketing team."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SR</div>
+            <div>
+              <div class="testimonial-name">Sarah Rivera</div>
+              <div class="testimonial-role">Head of Growth, Vercel</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Metrix gives us the speed we need. Seeing conversions in real-time has fundamentally changed how we run experiments."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JK</div>
+            <div>
+              <div class="testimonial-name">James Kim</div>
+              <div class="testimonial-role">CTO, Linear</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"The custom dashboards are incredible. Every team has their own view. Setup took 10 minutes, not 10 sprints."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AL</div>
+            <div>
+              <div class="testimonial-name">Ana López</div>
+              <div class="testimonial-role">VP Engineering, Notion</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container" style="position:relative;">
+      <div class="cta-bg"></div>
+      <div class="cta-inner">
+        <h2>Ready to see your<br>data clearly?</h2>
+        <p>Join 10,000+ teams who trust Metrix to power their decisions. Free forever for small projects.</p>
+        <a href="#" class="btn-primary">Start free — no card required</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="nav-logo-dot"></span> Metrix</div>
+      <ul class="footer-links">
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 Metrix. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Back to hub -->
+  <a href="./index.html" class="back-hub">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+    Hub
+  </a>
+
+  <!-- CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Pricing toggle ─────────────────────
+    const toggle = document.getElementById('billing-toggle');
+    const monthlyLabel = document.querySelector('.monthly-label');
+    const annualLabel = document.querySelector('.annual-label');
+    const saveBadge = document.querySelector('.save-badge');
+    let isAnnual = false;
+
+    toggle.addEventListener('click', () => {
+      isAnnual = !isAnnual;
+      toggle.classList.toggle('on', isAnnual);
+      monthlyLabel.classList.toggle('active', !isAnnual);
+      annualLabel.classList.toggle('active', isAnnual);
+      saveBadge.classList.toggle('visible', isAnnual);
+
+      document.querySelectorAll('.pricing-amount[data-monthly]').forEach(el => {
+        const price = isAnnual ? el.dataset.annual : el.dataset.monthly;
+        el.textContent = '$' + price;
+      });
+    });
+
+    // ── Lenis ──────────────────────────────
+    if (!prefersReducedMotion) {
+      const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    // ── GSAP ───────────────────────────────
+    if (!prefersReducedMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Hero sequence
+      tl.to('.hero-badge', { opacity: 1, y: 0, duration: 0.7 }, 0.2);
+      tl.to('.hero h1 .word', { opacity: 1, y: 0, duration: 0.6, stagger: 0.06 }, 0.4);
+      tl.to('.hero-sub', { opacity: 1, y: 0, duration: 0.8 }, 0.9);
+      tl.to('.hero-buttons', { opacity: 1, y: 0, duration: 0.7 }, 1.1);
+      tl.to('.hero-stats', { opacity: 1, y: 0, duration: 0.7 }, 1.3);
+      tl.to('.dashboard-wrapper', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, 1.4);
+      tl.to('.back-hub', { opacity: 1, duration: 0.5 }, 1.8);
+
+      // Dashboard parallax
+      gsap.to('.dashboard-wrapper', {
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      });
+
+      // Bar chart animation
+      document.querySelectorAll('.bar').forEach(bar => {
+        const h = bar.style.height;
+        bar.style.height = '0%';
+        gsap.to(bar, {
+          height: h,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: '.dash-chart', start: 'top 80%', once: true },
+          delay: Math.random() * 0.3,
+        });
+      });
+
+      // Features
+      gsap.to('.feature-card', {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.features-grid', start: 'top 80%', once: true },
+      });
+
+      // Pricing
+      gsap.to('.pricing-card', {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.pricing-grid', start: 'top 80%', once: true },
+      });
+
+      // Testimonials
+      gsap.to('.testimonial-card', {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.testimonials-grid', start: 'top 80%', once: true },
+      });
+
+      // CTA
+      gsap.to('.cta-inner', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.9,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.cta-section', start: 'top 75%', once: true },
+      });
+    }
+  </script>
+
+</body>
+</html>
