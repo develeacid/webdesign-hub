@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "npx @tailwindcss/cli -i ./src/css/main.css -o ./dist/css/main.css --minify",
-    "dev": "concurrently -n tw,srv -c blue,green \"npx @tailwindcss/cli -i ./src/css/main.css -o ./dist/css/main.css --watch\" \"serve . -l 3000\""
+    "dev": "concurrently -n tw,srv -c blue,green \"npx @tailwindcss/cli -i ./src/css/main.css -o ./dist/css/main.css --watch\" \"serve . -l 3000\"",
+    "capture": "node scripts/capture.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.2",
     "concurrently": "^9.2.1",
+    "puppeteer": "^24.40.0",
     "serve": "^14.2.6",
     "tailwindcss": "^4.2.2"
   }

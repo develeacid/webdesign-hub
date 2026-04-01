@@ -120,7 +120,6 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     if (cards.length === 0) return;
 
     cards.forEach((card, i) => {
-      // Reset: asegurar que empieza invisible
       gsap.set(card, { opacity: 0, y: 30 });
       gsap.to(card, {
         opacity: 1,
@@ -132,14 +131,14 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     });
   }
 
-  // Observar cambios en el grid para re-animar cuando Alpine actualiza
-  const cardGrid = document.querySelector('.card-reveal')?.closest('section');
-  if (cardGrid) {
+  // El grid de cards es la section que contiene los x-for templates
+  const cardGrids = document.querySelectorAll('section.grid');
+  cardGrids.forEach(grid => {
     const observer = new MutationObserver(() => {
       animateCards();
     });
-    observer.observe(cardGrid, { childList: true, subtree: true });
-  }
+    observer.observe(grid, { childList: true, subtree: true });
+  });
 
   // Tech stack cards: fade up on scroll
   gsap.from('.tech-card', {

@@ -271,12 +271,12 @@ Cada pagina incluye:
 - Respeto a `prefers-reduced-motion`
 - Imagenes de Unsplash con `?w=800&q=80`
 
-### Fase 4: Polish & Conexion Final
-38. Ejecutar script Puppeteer para screenshots reales
-39. Reemplazar placeholders del Hub con imagenes reales
-40. Auditoria `prefers-reduced-motion` en hub y cada pagina
-41. SEO basico (meta tags, Open Graph)
-42. Performance audit (Lighthouse)
+### Fase 4: Polish & Conexion Final ✅
+38. ~~SEO basico (meta tags, Open Graph en todas las paginas)~~ ✅
+39. ~~Script Puppeteer para screenshots (`npm run capture`)~~ ✅
+40. ~~`prefers-reduced-motion` verificado en todas las paginas~~ ✅
+41. Ejecutar `npm run capture` con server corriendo para generar screenshots
+42. Reemplazar placeholders del Hub con screenshots reales
 43. Deploy final a GitHub Pages
 
 ---
