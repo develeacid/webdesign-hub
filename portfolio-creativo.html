@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomás Kael — Art Director & Branding</title>
+  <meta name="description" content="Art direction and branding for brands that refuse to blend in.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/css/main.css">
+  <style>
+    @font-face {
+      font-family: 'ClashDisplay';
+      src: url('https://api.fontshare.com/v2/css?f[]=clash-display@700&display=swap');
+    }
+
+    :root {
+      --tk-bg: #f5f5f0;
+      --tk-text: #1a1a1a;
+      --tk-muted: #999;
+      --tk-accent: #ff4d00;
+      --tk-rule: #1a1a1a;
+      --tk-light: #e5e5e0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--tk-bg);
+      color: var(--tk-text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--tk-accent);
+      color: #fff;
+    }
+
+    /* ── Nav ────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      mix-blend-mode: difference;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-contact {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.875rem;
+      color: #fff;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .nav-contact::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .nav-contact:hover::after { width: 100%; }
+
+    /* ── Hero ───────────────────────────────── */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      overflow: hidden;
+    }
+
+    .hero-name-first {
+      font-size: clamp(5rem, 25vw, 28vw);
+      display: block;
+    }
+
+    .hero-name-last {
+      font-size: clamp(5rem, 25vw, 28vw);
+      display: block;
+      text-align: right;
+      padding-right: 5vw;
+    }
+
+    .hero-name .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    .hero-subtitle {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-line {
+      width: 0;
+      height: 1px;
+      background: var(--tk-rule);
+    }
+
+    .hero-role {
+      font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+      font-weight: 300;
+      color: var(--tk-muted);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+    }
+
+    .hero-scroll span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tk-muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--tk-muted);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--tk-text);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0% { top: -100%; }
+      50% { top: 100%; }
+      100% { top: 100%; }
+    }
+
+    /* ── Section header ────────────────────── */
+    .section-header {
+      padding: 0 2rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .section-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      color: var(--tk-muted);
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--tk-light);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tk-muted);
+    }
+
+    /* ── Work ───────────────────────────────── */
+    .work {
+      padding: 8rem 0;
+    }
+
+    .work-grid {
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .work-grid {
+        grid-template-columns: 1.4fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 1.5rem;
+      }
+    }
+
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .work-img-wrapper {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--tk-light);
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .work-item:nth-child(1) .work-img-wrapper { aspect-ratio: 16/10; }
+      .work-item:nth-child(4) .work-img-wrapper { aspect-ratio: 16/10; }
+    }
+
+    .work-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      clip-path: inset(0 100% 0 0);
+    }
+
+    .work-item:hover .work-img {
+      transform: scale(1.04);
+    }
+
+    .work-info {
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--tk-light);
+    }
+
+    .work-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+    }
+
+    .work-cat {
+      font-size: 0.75rem;
+      color: var(--tk-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .work-accent {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tk-accent);
+      margin-right: 0.5rem;
+    }
+
+    /* ── About ──────────────────────────────── */
+    .about {
+      padding: 8rem 2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .about-text {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .about-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+    }
+
+    .about-heading em {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--tk-accent);
+    }
+
+    .about-bio {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--tk-muted);
+      font-weight: 300;
+      max-width: 480px;
+    }
+
+    .about-stats {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 3rem;
+    }
+
+    .about-stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .about-stat-label {
+      font-size: 0.75rem;
+      color: var(--tk-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    .about-photo {
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .about-photo-inner {
+      aspect-ratio: 3/4;
+      background: var(--tk-light);
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-photo-accent {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      width: 40%;
+      height: 40%;
+      border: 2px solid var(--tk-accent);
+      z-index: -1;
+    }
+
+    /* ── Contact ────────────────────────────── */
+    .contact {
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: scale(0.96);
+    }
+
+    .contact-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 10vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-heading em {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--tk-accent);
+    }
+
+    .contact-email {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      color: var(--tk-text);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .contact-email::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--tk-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-email:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .contact-socials {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .contact-socials a {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tk-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-socials a:hover { color: var(--tk-accent); }
+
+    /* ── Footer ─────────────────────────────── */
+    .footer {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--tk-light);
+      font-size: 0.75rem;
+      color: var(--tk-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Back to hub ───────────────────────── */
+    .back-hub {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      border-radius: 0;
+      border: 1px solid var(--tk-rule);
+      background: var(--tk-bg);
+      color: var(--tk-text);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .back-hub:hover {
+      background: var(--tk-text);
+      color: var(--tk-bg);
+    }
+
+    .back-hub svg { width: 14px; height: 14px; }
+
+    /* ── Reduced motion ────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-name .char, .hero-subtitle, .hero-scroll,
+      .about-text, .about-photo, .contact-inner, .back-hub {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .work-img { clip-path: none !important; }
+      .hero-line { width: 60px !important; }
+      .scroll-line::after { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">TK</a>
+    <a href="#contact" class="nav-contact">Contact</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-name">
+      <span class="hero-name-first" aria-label="Tomás"></span>
+      <span class="hero-name-last" aria-label="Kael"></span>
+    </div>
+    <div class="hero-subtitle">
+      <div class="hero-line"></div>
+      <span class="hero-role">Art Director & Branding</span>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Selected Work -->
+  <section class="work">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <div class="section-rule"></div>
+      <span class="section-label">Selected Work</span>
+    </div>
+
+    <div class="work-grid">
+      <div class="work-item">
+        <div class="work-img-wrapper">
+          <img class="work-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Nørd Collective brand identity" loading="lazy">
+        </div>
+        <div class="work-info">
+          <span class="work-title"><span class="work-accent"></span>Nørd Collective</span>
+          <span class="work-cat">Brand Identity</span>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-img-wrapper">
+          <img class="work-img" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80" alt="Forma Studio visual system" loading="lazy">
+        </div>
+        <div class="work-info">
+          <span class="work-title"><span class="work-accent"></span>Forma Studio</span>
+          <span class="work-cat">Visual System</span>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-img-wrapper">
+          <img class="work-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80" alt="Blackhaus packaging" loading="lazy">
+        </div>
+        <div class="work-info">
+          <span class="work-title"><span class="work-accent"></span>Blackhaus</span>
+          <span class="work-cat">Packaging</span>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-img-wrapper">
+          <img class="work-img" src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80" alt="Veil Magazine editorial" loading="lazy">
+        </div>
+        <div class="work-info">
+          <span class="work-title"><span class="work-accent"></span>Veil Magazine</span>
+          <span class="work-cat">Editorial</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <div class="section-rule"></div>
+      <span class="section-label">About</span>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="about-heading">Crafting brands<br>that <em>refuse</em><br>to blend in</h2>
+        <p class="about-bio">
+          I'm Tomás Kael, a Madrid-based art director with over a decade of experience shaping visual identities for studios, startups, and cultural institutions. I believe in restraint, contrast, and the power of a single bold idea executed with precision.
+        </p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-value">12+</div>
+            <div class="about-stat-label">Years</div>
+          </div>
+          <div>
+            <div class="about-stat-value">80+</div>
+            <div class="about-stat-label">Brands</div>
+          </div>
+          <div>
+            <div class="about-stat-value">6</div>
+            <div class="about-stat-label">Awards</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-photo">
+        <div class="about-photo-inner">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Tomás Kael portrait" loading="lazy">
+        </div>
+        <div class="about-photo-accent" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <div class="section-rule"></div>
+      <span class="section-label">Contact</span>
+    </div>
+
+    <div class="contact-inner">
+      <h2 class="contact-heading">Let's create<br>something <em>bold</em></h2>
+      <a href="mailto:hello@tomaskael.com" class="contact-email">hello@tomaskael.com</a>
+      <div class="contact-socials">
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>© 2026 Tomás Kael</span>
+    <span>Madrid, Spain</span>
+  </footer>
+
+  <!-- Back to hub -->
+  <a href="./index.html" class="back-hub">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+    Hub
+  </a>
+
+  <!-- CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Populate hero name with individual chars ──
+    function splitName(el, text) {
+      el.innerHTML = '';
+      text.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = char;
+        el.appendChild(span);
+      });
+    }
+
+    splitName(document.querySelector('.hero-name-first'), 'TOMÁS');
+    splitName(document.querySelector('.hero-name-last'), 'KAEL');
+
+    // ── Lenis ──────────────────────────────
+    if (!prefersReducedMotion) {
+      const lenis = new Lenis({ duration: 1.4, smoothWheel: true });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    // ── GSAP ───────────────────────────────
+    if (!prefersReducedMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero entry
+      const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+      heroTl.to('.hero-name-first .char', {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.06,
+      }, 0.3);
+
+      heroTl.to('.hero-name-last .char', {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.06,
+      }, 0.6);
+
+      heroTl.to('.hero-subtitle', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, 1.2);
+
+      heroTl.to('.hero-line', {
+        width: 60,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, 1.2);
+
+      heroTl.to('.hero-scroll', {
+        opacity: 1,
+        duration: 0.6,
+      }, 1.6);
+
+      heroTl.to('.back-hub', {
+        opacity: 1,
+        duration: 0.5,
+      }, 1.8);
+
+      // Work: clip-path reveal
+      document.querySelectorAll('.work-img').forEach(img => {
+        gsap.to(img, {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 1.2,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 80%',
+            once: true,
+          },
+        });
+      });
+
+      // About text
+      gsap.to('.about-text', {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.about-text', start: 'top 75%', once: true },
+      });
+
+      // About photo
+      gsap.to('.about-photo', {
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.about-photo', start: 'top 75%', once: true },
+      });
+
+      // About photo parallax
+      gsap.to('.about-photo img', {
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.about',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      // Contact
+      gsap.to('.contact-inner', {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.contact', start: 'top 70%', once: true },
+      });
+    }
+  </script>
+
+</body>
+</html>
