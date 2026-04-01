@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse — Train Smarter. Live Stronger.</title>
-  <meta name="description" content="Modern fitness training with world-class coaches. Your first week is free.">
-  <meta property="og:title" content="Pulse — Train Smarter. Live Stronger.">
-  <meta property="og:description" content="Modern fitness training with world-class coaches. Your first week is free.">
+  <title>Pulse — Entrena Más Inteligente. Vive Más Fuerte.</title>
+  <meta name="description" content="Entrenamiento fitness moderno con entrenadores de clase mundial. Tu primera semana es gratis.">
+  <meta property="og:title" content="Pulse — Entrena Más Inteligente. Vive Más Fuerte.">
+  <meta property="og:description" content="Entrenamiento fitness moderno con entrenadores de clase mundial. Tu primera semana es gratis.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -242,11 +242,6 @@
       color: var(--p-muted);
     }
 
-    /* ── Plans ──────────────────────────────── */
-    .plans {
-      padding: 6rem 0;
-    }
-
     .section-header {
       text-align: center;
       margin-bottom: 3rem;
@@ -264,129 +259,6 @@
       margin-top: 0.75rem;
       font-size: clamp(1.75rem, 4vw, 2.5rem);
       letter-spacing: 0.02em;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .plan-card {
-      padding: 2rem;
-      border: 1px solid var(--p-border);
-      background: var(--p-surface);
-      position: relative;
-      transition: all 0.3s;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .plan-card:hover {
-      border-color: rgba(57, 255, 20, 0.15);
-    }
-
-    .plan-card.featured {
-      border-color: var(--p-accent);
-      box-shadow: 0 0 30px rgba(57, 255, 20, 0.06);
-    }
-
-    .plan-badge {
-      position: absolute;
-      top: -1px; right: -1px;
-      padding: 0.3rem 0.75rem;
-      background: var(--p-accent);
-      color: var(--p-bg);
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .plan-name {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--p-muted);
-    }
-
-    .plan-price {
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.25rem;
-    }
-
-    .plan-amount {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .plan-period {
-      font-size: 0.85rem;
-      color: var(--p-muted);
-    }
-
-    .plan-features {
-      margin-top: 1.5rem;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-    }
-
-    .plan-features li {
-      font-size: 0.85rem;
-      color: var(--p-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .plan-features li::before {
-      content: '→';
-      color: var(--p-accent);
-      font-size: 0.7rem;
-    }
-
-    .plan-btn {
-      display: block;
-      width: 100%;
-      margin-top: 1.5rem;
-      padding: 0.75rem;
-      text-align: center;
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid var(--p-border);
-      background: transparent;
-      color: var(--p-text);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .plan-btn:hover {
-      border-color: var(--p-accent);
-      color: var(--p-accent);
-    }
-
-    .plan-card.featured .plan-btn {
-      background: var(--p-accent);
-      color: var(--p-bg);
-      border-color: var(--p-accent);
-    }
-
-    .plan-card.featured .plan-btn:hover {
-      box-shadow: 0 0 20px var(--p-glow);
     }
 
     /* ── Trainers ───────────────────────────── */
@@ -568,7 +440,7 @@
     /* ── Reduced motion ────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       .hero h1 .line-inner { transform: none !important; }
-      .hero-sub, .hero-cta, .stat, .plan-card, .trainer-card,
+      .hero-sub, .hero-cta, .stat, .trainer-card,
       .cta-inner, .back-hub {
         opacity: 1 !important; transform: none !important;
       }
@@ -581,10 +453,9 @@
   <nav class="nav">
     <a href="#" class="nav-logo">PULSE<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="#plans">Plans</a></li>
-      <li><a href="#trainers">Trainers</a></li>
+      <li><a href="#trainers">Entrenadores</a></li>
     </ul>
-    <a href="#" class="nav-cta">Join now</a>
+    <a href="#" class="nav-cta">Únete ahora</a>
   </nav>
 
   <!-- Hero -->
@@ -596,11 +467,11 @@
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
       <h1>
-        <span class="line"><span class="line-inner">Train</span></span>
-        <span class="line"><span class="line-inner accent">Smarter</span></span>
+        <span class="line"><span class="line-inner">Entrena</span></span>
+        <span class="line"><span class="line-inner accent">Mejor</span></span>
       </h1>
-      <p class="hero-sub">World-class coaches. Cutting-edge programs. Results you can measure.</p>
-      <a href="#plans" class="hero-cta">Start your free week</a>
+      <p class="hero-sub">Entrenadores de clase mundial. Programas de vanguardia. Resultados que puedes medir.</p>
+      <a href="#trainers" class="hero-cta">Comienza tu semana gratis</a>
     </div>
   </section>
 
@@ -610,72 +481,15 @@
       <div class="stats-grid">
         <div class="stat">
           <div class="stat-value"><span data-target="500">0</span><span class="stat-suffix">+</span></div>
-          <div class="stat-label">Active Members</div>
+          <div class="stat-label">Miembros Activos</div>
         </div>
         <div class="stat">
           <div class="stat-value"><span data-target="25">0</span></div>
-          <div class="stat-label">Expert Coaches</div>
+          <div class="stat-label">Entrenadores Expertos</div>
         </div>
         <div class="stat">
           <div class="stat-value"><span data-target="12">0</span><span class="stat-suffix">K</span></div>
-          <div class="stat-label">Sessions / Month</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Plans -->
-  <section class="plans" id="plans">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Membership</div>
-        <h2 class="section-title">Choose your plan</h2>
-      </div>
-      <div class="plans-grid">
-        <div class="plan-card">
-          <div class="plan-name">Basic</div>
-          <div class="plan-price">
-            <span class="plan-amount">$29</span>
-            <span class="plan-period">/ mo</span>
-          </div>
-          <ul class="plan-features">
-            <li>Gym floor access</li>
-            <li>2 group classes / week</li>
-            <li>Locker room</li>
-            <li>Basic app tracking</li>
-          </ul>
-          <button class="plan-btn">Get started</button>
-        </div>
-        <div class="plan-card featured">
-          <div class="plan-badge">Popular</div>
-          <div class="plan-name">Pro</div>
-          <div class="plan-price">
-            <span class="plan-amount">$59</span>
-            <span class="plan-period">/ mo</span>
-          </div>
-          <ul class="plan-features">
-            <li>Unlimited access</li>
-            <li>All group classes</li>
-            <li>1 PT session / week</li>
-            <li>Nutrition planning</li>
-            <li>Full app analytics</li>
-          </ul>
-          <button class="plan-btn">Get started</button>
-        </div>
-        <div class="plan-card">
-          <div class="plan-name">Elite</div>
-          <div class="plan-price">
-            <span class="plan-amount">$99</span>
-            <span class="plan-period">/ mo</span>
-          </div>
-          <ul class="plan-features">
-            <li>Everything in Pro</li>
-            <li>Unlimited PT sessions</li>
-            <li>Recovery zone access</li>
-            <li>Quarterly body scan</li>
-            <li>Priority booking</li>
-          </ul>
-          <button class="plan-btn">Get started</button>
+          <div class="stat-label">Sesiones / Mes</div>
         </div>
       </div>
     </div>
@@ -685,8 +499,8 @@
   <section class="trainers" id="trainers">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">Coaches</div>
-        <h2 class="section-title">Meet the team</h2>
+        <div class="section-label">Entrenadores</div>
+        <h2 class="section-title">Conoce al equipo</h2>
       </div>
       <div class="trainers-grid">
         <div class="trainer-card">
@@ -695,7 +509,7 @@
           </div>
           <div class="trainer-info">
             <div class="trainer-name">Alex Reeves</div>
-            <div class="trainer-spec">Strength & Conditioning</div>
+            <div class="trainer-spec">Fuerza y Acondicionamiento</div>
           </div>
         </div>
         <div class="trainer-card">
@@ -704,7 +518,7 @@
           </div>
           <div class="trainer-info">
             <div class="trainer-name">Maya Santos</div>
-            <div class="trainer-spec">HIIT & Functional</div>
+            <div class="trainer-spec">HIIT y Funcional</div>
           </div>
         </div>
         <div class="trainer-card">
@@ -713,7 +527,7 @@
           </div>
           <div class="trainer-info">
             <div class="trainer-name">Jordan Cole</div>
-            <div class="trainer-spec">Olympic Lifting</div>
+            <div class="trainer-spec">Halterofilia Olímpica</div>
           </div>
         </div>
       </div>
@@ -724,20 +538,20 @@
   <section class="cta">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="cta-inner">
-      <h2>Your first week<br>is <span class="accent">free</span></h2>
-      <p>No commitment. No card required. Just show up.</p>
-      <a href="#" class="cta-btn">Claim your free week</a>
+      <h2>Tu primera semana<br>es <span class="accent">gratis</span></h2>
+      <p>Sin compromiso. Sin tarjeta. Solo preséntate.</p>
+      <a href="#" class="cta-btn">Reclama tu semana gratis</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-brand">PULSE<span>.</span></div>
-    <span>© 2026 Pulse Fitness. All rights reserved.</span>
+    <span>© 2026 Pulse Fitness. Todos los derechos reservados.</span>
   </footer>
 
   <!-- Back to hub -->
-  <a href="./index.html" class="back-hub">
+  <a href="./index.html" class="back-hub" aria-label="Volver al hub">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
     Hub
   </a>
@@ -787,12 +601,6 @@
             });
           }
         },
-      });
-
-      // Plans
-      gsap.to('.plan-card', {
-        opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out',
-        scrollTrigger: { trigger: '.plans-grid', start: 'top 80%', once: true },
       });
 
       // Trainers

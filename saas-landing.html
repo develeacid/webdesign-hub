@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Metrix — Real-time Analytics for Modern Teams</title>
-  <meta name="description" content="Analytics that move as fast as you. Real-time insights, custom dashboards, team collaboration.">
-  <meta property="og:title" content="Metrix — Real-time Analytics for Modern Teams">
-  <meta property="og:description" content="Analytics that move as fast as you. Real-time insights, custom dashboards, team collaboration.">
+  <title>Metrix — Analíticas en Tiempo Real para Equipos Modernos</title>
+  <meta name="description" content="Analíticas que se mueven tan rápido como tú. Datos en tiempo real, dashboards personalizados, colaboración en equipo.">
+  <meta property="og:title" content="Metrix — Analíticas en Tiempo Real para Equipos Modernos">
+  <meta property="og:description" content="Analíticas que se mueven tan rápido como tú. Datos en tiempo real, dashboards personalizados, colaboración en equipo.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -506,178 +506,6 @@
       line-height: 1.65;
     }
 
-    /* ── Pricing ────────────────────────────── */
-    .pricing-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-
-    .pricing-toggle span {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--mx-muted);
-    }
-
-    .pricing-toggle span.active { color: var(--mx-text); font-weight: 600; }
-
-    .toggle-switch {
-      width: 48px;
-      height: 26px;
-      background: var(--mx-border);
-      border-radius: 100px;
-      cursor: pointer;
-      position: relative;
-      border: none;
-      transition: background 0.3s;
-    }
-
-    .toggle-switch.on { background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet)); }
-
-    .toggle-switch::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border-radius: 50%;
-      top: 3px;
-      left: 3px;
-      transition: transform 0.3s ease;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    }
-
-    .toggle-switch.on::after { transform: translateX(22px); }
-
-    .save-badge {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #10b981;
-      background: rgba(16, 185, 129, 0.08);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .save-badge.visible { opacity: 1; }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-      max-width: 920px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .pricing-card {
-      padding: 2rem;
-      border-radius: 14px;
-      border: 1px solid var(--mx-border);
-      background: var(--mx-surface);
-      position: relative;
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .pricing-card:hover {
-      box-shadow: var(--mx-shadow);
-    }
-
-    .pricing-card.featured {
-      border-color: transparent;
-      background: linear-gradient(var(--mx-surface), var(--mx-surface)) padding-box,
-                  linear-gradient(135deg, var(--mx-indigo), var(--mx-violet)) border-box;
-      border: 2px solid transparent;
-      box-shadow: var(--mx-shadow-lg);
-    }
-
-    .pricing-popular {
-      position: absolute;
-      top: -10px;
-      right: 1.5rem;
-      padding: 0.2rem 0.75rem;
-      background: linear-gradient(135deg, var(--mx-indigo), var(--mx-violet));
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 600;
-      border-radius: 6px;
-    }
-
-    .pricing-plan {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--mx-muted);
-    }
-
-    .pricing-price {
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.25rem;
-    }
-
-    .pricing-amount {
-      font-family: 'Sora', sans-serif;
-      font-size: 2.75rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .pricing-period {
-      font-size: 0.875rem;
-      color: var(--mx-muted);
-    }
-
-    .pricing-desc {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--mx-muted);
-      line-height: 1.5;
-    }
-
-    .pricing-features {
-      margin-top: 1.5rem;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-    }
-
-    .pricing-features li {
-      font-size: 0.85rem;
-      color: var(--mx-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .pricing-features li::before {
-      content: '';
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: rgba(16, 185, 129, 0.1);
-      flex-shrink: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981' width='12' height='12'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 11px;
-    }
-
-    .pricing-card .btn-primary,
-    .pricing-card .btn-secondary {
-      display: block;
-      width: 100%;
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
     /* ── Testimonials ──────────────────────── */
     .testimonials { background: var(--mx-surface); }
 
@@ -867,7 +695,7 @@
     /* ── Reduced motion ────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       .hero-badge, .hero h1 .word, .hero-sub, .hero-buttons, .hero-stats,
-      .dashboard-wrapper, .feature-card, .pricing-card, .testimonial-card,
+      .dashboard-wrapper, .feature-card, .testimonial-card,
       .cta-inner, .back-hub {
         opacity: 1 !important;
         transform: none !important;
@@ -883,48 +711,48 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo"><span class="nav-logo-dot"></span> Metrix</a>
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#features">Funciones</a></li>
+        <li><a href="#testimonials">Testimonios</a></li>
       </ul>
-      <a href="#" class="nav-cta">Get started</a>
+      <a href="#" class="nav-cta">Comenzar</a>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="hero-badge">✨ Now with AI-powered insights</div>
+      <div class="hero-badge">✨ Ahora con análisis impulsados por IA</div>
 
       <h1>
-        <span class="word">Analytics</span>
-        <span class="word">that</span>
-        <span class="word">move</span>
-        <span class="word">as</span>
-        <span class="word">fast</span>
-        <span class="word">as</span>
-        <span class="word">you</span>
+        <span class="word">Analíticas</span>
+        <span class="word">que</span>
+        <span class="word">se</span>
+        <span class="word">mueven</span>
+        <span class="word">tan</span>
+        <span class="word">rápido</span>
+        <span class="word">como</span>
+        <span class="word">tú</span>
       </h1>
 
-      <p class="hero-sub">Track every metric that matters. Build custom dashboards in seconds. Share insights with your team in real-time.</p>
+      <p class="hero-sub">Rastrea cada métrica que importa. Crea dashboards personalizados en segundos. Comparte datos con tu equipo en tiempo real.</p>
 
       <div class="hero-buttons">
-        <a href="#" class="btn-primary">Start free trial</a>
-        <a href="#" class="btn-secondary">See a demo →</a>
+        <a href="#" class="btn-primary">Prueba gratis</a>
+        <a href="#" class="btn-secondary">Ver demo →</a>
       </div>
 
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="hero-stat-value">10K+</div>
-          <div class="hero-stat-label">Teams</div>
+          <div class="hero-stat-label">Equipos</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-value">99.9%</div>
-          <div class="hero-stat-label">Uptime</div>
+          <div class="hero-stat-label">Disponibilidad</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-value">&lt;50ms</div>
-          <div class="hero-stat-label">Latency</div>
+          <div class="hero-stat-label">Latencia</div>
         </div>
       </div>
 
@@ -934,34 +762,34 @@
         <div class="dashboard">
           <div class="dash-topbar">
             <div class="dash-dots"><span></span><span></span><span></span></div>
-            <span class="dash-title">Metrix Dashboard</span>
+            <span class="dash-title">Panel Metrix</span>
             <div style="width: 42px;"></div>
           </div>
           <div class="dash-body">
             <div class="dash-metric">
-              <div class="dash-metric-label">Monthly Revenue</div>
+              <div class="dash-metric-label">Ingresos Mensuales</div>
               <div class="dash-metric-value">$48.2K</div>
-              <div class="dash-metric-change">↑ 12.5% vs last month</div>
+              <div class="dash-metric-change">↑ 12.5% vs mes anterior</div>
             </div>
             <div class="dash-metric">
-              <div class="dash-metric-label">Active Users</div>
+              <div class="dash-metric-label">Usuarios Activos</div>
               <div class="dash-metric-value">2,847</div>
-              <div class="dash-metric-change">↑ 8.3% vs last month</div>
+              <div class="dash-metric-change">↑ 8.3% vs mes anterior</div>
             </div>
             <div class="dash-metric">
-              <div class="dash-metric-label">Bounce Rate</div>
+              <div class="dash-metric-label">Tasa de Rebote</div>
               <div class="dash-metric-value">24.1%</div>
-              <div class="dash-metric-change down">↓ 3.2% vs last month</div>
+              <div class="dash-metric-change down">↓ 3.2% vs mes anterior</div>
             </div>
             <div class="dash-metric">
-              <div class="dash-metric-label">Avg. Session</div>
+              <div class="dash-metric-label">Sesión Prom.</div>
               <div class="dash-metric-value">4m 32s</div>
-              <div class="dash-metric-change">↑ 18.7% vs last month</div>
+              <div class="dash-metric-change">↑ 18.7% vs mes anterior</div>
             </div>
             <div class="dash-chart">
               <div class="dash-chart-header">
-                <span class="dash-chart-title">Visitors — Last 12 months</span>
-                <span class="dash-chart-badge">+24% YoY</span>
+                <span class="dash-chart-title">Visitantes — Últimos 12 meses</span>
+                <span class="dash-chart-badge">+24% interanual</span>
               </div>
               <div class="bars">
                 <div class="bar bar-indigo" style="height:35%"></div>
@@ -990,9 +818,9 @@
                 <div class="bar bar-cyan" style="height:92%"></div>
               </div>
               <div class="bars-labels">
-                <span>Jan</span><span></span><span>Mar</span><span></span><span>May</span><span></span>
+                <span>Ene</span><span></span><span>Mar</span><span></span><span>May</span><span></span>
                 <span>Jul</span><span></span><span>Sep</span><span></span><span>Nov</span><span></span>
-                <span>Jan</span><span></span><span>Mar</span><span></span><span>May</span><span></span>
+                <span>Ene</span><span></span><span>Mar</span><span></span><span>May</span><span></span>
                 <span>Jul</span><span></span><span>Sep</span><span></span><span>Nov</span><span></span>
               </div>
             </div>
@@ -1005,102 +833,33 @@
   <!-- Features -->
   <section class="features" id="features">
     <div class="container">
-      <div class="section-label">Features</div>
-      <h2 class="section-title">Everything you need to<br>understand your data</h2>
-      <p class="section-sub">Built for teams who ship fast and make decisions with data, not guesswork.</p>
+      <div class="section-label">Funciones</div>
+      <h2 class="section-title">Todo lo que necesitas para<br>entender tus datos</h2>
+      <p class="section-sub">Diseñado para equipos que lanzan rápido y toman decisiones con datos, no con suposiciones.</p>
 
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon feature-icon-indigo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </div>
-          <h3>Real-time data</h3>
-          <p>See every click, pageview, and conversion the moment it happens. Sub-50ms latency across all regions.</p>
+          <h3>Datos en tiempo real</h3>
+          <p>Observa cada clic, vista de página y conversión en el momento que sucede. Latencia inferior a 50ms en todas las regiones.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon feature-icon-violet">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
           </div>
-          <h3>Custom dashboards</h3>
-          <p>Drag-and-drop widgets. Pin the metrics that matter. Create unlimited views for every team and stakeholder.</p>
+          <h3>Dashboards personalizados</h3>
+          <p>Widgets drag-and-drop. Fija las métricas que importan. Crea vistas ilimitadas para cada equipo e interesado.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon feature-icon-cyan">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <h3>Team sharing</h3>
-          <p>Share dashboards with a link. Set granular permissions. Get Slack alerts when metrics cross thresholds.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing">
-    <div class="container">
-      <div class="section-label">Pricing</div>
-      <h2 class="section-title">Simple, transparent pricing</h2>
-      <p class="section-sub">Start free, scale when you're ready. No credit card required.</p>
-
-      <div class="pricing-toggle">
-        <span class="monthly-label active">Monthly</span>
-        <button class="toggle-switch" id="billing-toggle" aria-label="Toggle annual billing"></button>
-        <span class="annual-label">Annual</span>
-        <span class="save-badge">Save 20%</span>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="pricing-plan">Free</div>
-          <div class="pricing-price">
-            <span class="pricing-amount">$0</span>
-            <span class="pricing-period">/ mo</span>
-          </div>
-          <p class="pricing-desc">For individuals exploring analytics.</p>
-          <ul class="pricing-features">
-            <li>1 dashboard</li>
-            <li>1K events / month</li>
-            <li>7-day data retention</li>
-            <li>Community support</li>
-          </ul>
-          <a href="#" class="btn-secondary">Get started</a>
-        </div>
-
-        <div class="pricing-card featured">
-          <div class="pricing-popular">Most popular</div>
-          <div class="pricing-plan">Pro</div>
-          <div class="pricing-price">
-            <span class="pricing-amount" data-monthly="29" data-annual="23">$29</span>
-            <span class="pricing-period">/ mo</span>
-          </div>
-          <p class="pricing-desc">For growing teams who need more.</p>
-          <ul class="pricing-features">
-            <li>Unlimited dashboards</li>
-            <li>100K events / month</li>
-            <li>12-month retention</li>
-            <li>AI-powered insights</li>
-            <li>Priority support</li>
-          </ul>
-          <a href="#" class="btn-primary">Start free trial</a>
-        </div>
-
-        <div class="pricing-card">
-          <div class="pricing-plan">Team</div>
-          <div class="pricing-price">
-            <span class="pricing-amount" data-monthly="79" data-annual="63">$79</span>
-            <span class="pricing-period">/ mo</span>
-          </div>
-          <p class="pricing-desc">For organizations at scale.</p>
-          <ul class="pricing-features">
-            <li>Everything in Pro</li>
-            <li>Unlimited events</li>
-            <li>Unlimited retention</li>
-            <li>SSO & audit logs</li>
-            <li>Dedicated account manager</li>
-          </ul>
-          <a href="#" class="btn-secondary">Contact sales</a>
+          <h3>Compartir en equipo</h3>
+          <p>Comparte dashboards con un enlace. Configura permisos granulares. Recibe alertas en Slack cuando las métricas crucen umbrales.</p>
         </div>
       </div>
     </div>
@@ -1109,23 +868,23 @@
   <!-- Testimonials -->
   <section class="testimonials" id="testimonials">
     <div class="container">
-      <div class="section-label">Testimonials</div>
-      <h2 class="section-title">Loved by data-driven teams</h2>
+      <div class="section-label">Testimonios</div>
+      <h2 class="section-title">Amado por equipos orientados a datos</h2>
 
       <div class="testimonials-grid">
         <div class="testimonial-card">
-          <p class="testimonial-quote">"We switched from Google Analytics and never looked back. The real-time dashboard is a game changer for our marketing team."</p>
+          <p class="testimonial-quote">"Dejamos Google Analytics y no miramos atrás. El dashboard en tiempo real es un cambio total para nuestro equipo de marketing."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">SR</div>
             <div>
               <div class="testimonial-name">Sarah Rivera</div>
-              <div class="testimonial-role">Head of Growth, Vercel</div>
+              <div class="testimonial-role">Directora de Crecimiento, Vercel</div>
             </div>
           </div>
         </div>
 
         <div class="testimonial-card">
-          <p class="testimonial-quote">"Metrix gives us the speed we need. Seeing conversions in real-time has fundamentally changed how we run experiments."</p>
+          <p class="testimonial-quote">"Metrix nos da la velocidad que necesitamos. Ver conversiones en tiempo real ha cambiado fundamentalmente cómo ejecutamos experimentos."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">JK</div>
             <div>
@@ -1136,7 +895,7 @@
         </div>
 
         <div class="testimonial-card">
-          <p class="testimonial-quote">"The custom dashboards are incredible. Every team has their own view. Setup took 10 minutes, not 10 sprints."</p>
+          <p class="testimonial-quote">"Los dashboards personalizados son increíbles. Cada equipo tiene su propia vista. La configuración tomó 10 minutos, no 10 sprints."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">AL</div>
             <div>
@@ -1154,9 +913,9 @@
     <div class="container" style="position:relative;">
       <div class="cta-bg"></div>
       <div class="cta-inner">
-        <h2>Ready to see your<br>data clearly?</h2>
-        <p>Join 10,000+ teams who trust Metrix to power their decisions. Free forever for small projects.</p>
-        <a href="#" class="btn-primary">Start free — no card required</a>
+        <h2>¿Listo para ver tus<br>datos con claridad?</h2>
+        <p>Únete a más de 10,000 equipos que confían en Metrix para impulsar sus decisiones. Gratis para siempre en proyectos pequeños.</p>
+        <a href="#" class="btn-primary">Comenzar gratis — sin tarjeta</a>
       </div>
     </div>
   </section>
@@ -1166,17 +925,16 @@
     <div class="footer-inner">
       <div class="footer-brand"><span class="nav-logo-dot"></span> Metrix</div>
       <ul class="footer-links">
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Docs</a></li>
+        <li><a href="#">Funciones</a></li>
+        <li><a href="#">Documentación</a></li>
         <li><a href="#">Blog</a></li>
       </ul>
-      <div class="footer-copy">© 2026 Metrix. All rights reserved.</div>
+      <div class="footer-copy">© 2026 Metrix. Todos los derechos reservados.</div>
     </div>
   </footer>
 
   <!-- Back to hub -->
-  <a href="./index.html" class="back-hub">
+  <a href="./index.html" class="back-hub" aria-label="Volver al hub">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
     Hub
   </a>
@@ -1188,26 +946,6 @@
 
   <script>
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // ── Pricing toggle ─────────────────────
-    const toggle = document.getElementById('billing-toggle');
-    const monthlyLabel = document.querySelector('.monthly-label');
-    const annualLabel = document.querySelector('.annual-label');
-    const saveBadge = document.querySelector('.save-badge');
-    let isAnnual = false;
-
-    toggle.addEventListener('click', () => {
-      isAnnual = !isAnnual;
-      toggle.classList.toggle('on', isAnnual);
-      monthlyLabel.classList.toggle('active', !isAnnual);
-      annualLabel.classList.toggle('active', isAnnual);
-      saveBadge.classList.toggle('visible', isAnnual);
-
-      document.querySelectorAll('.pricing-amount[data-monthly]').forEach(el => {
-        const price = isAnnual ? el.dataset.annual : el.dataset.monthly;
-        el.textContent = '$' + price;
-      });
-    });
 
     // ── Lenis ──────────────────────────────
     if (!prefersReducedMotion) {
@@ -1264,16 +1002,6 @@
         stagger: 0.15,
         ease: 'power2.out',
         scrollTrigger: { trigger: '.features-grid', start: 'top 80%', once: true },
-      });
-
-      // Pricing
-      gsap.to('.pricing-card', {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '.pricing-grid', start: 'top 80%', once: true },
       });
 
       // Testimonials

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevForge 2026 — Where Builders Converge</title>
-  <meta name="description" content="The premier developer conference. June 15-17, 2026 · Berlin.">
-  <meta property="og:title" content="DevForge 2026 — Where Builders Converge">
-  <meta property="og:description" content="The premier developer conference. June 15-17, 2026 · Berlin.">
+  <title>DevForge 2026 — Donde los Creadores Convergen</title>
+  <meta name="description" content="La conferencia principal para desarrolladores. 15–17 de junio, 2026 · Berlín.">
+  <meta property="og:title" content="DevForge 2026 — Donde los Creadores Convergen">
+  <meta property="og:description" content="La conferencia principal para desarrolladores. 15–17 de junio, 2026 · Berlín.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -447,126 +447,6 @@
       color: var(--df-muted);
     }
 
-    /* ── Tickets ────────────────────────────── */
-    .tickets {
-      padding: 6rem 0;
-      border-top: 1px solid var(--df-glass-border);
-    }
-
-    .tickets-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    .ticket-card {
-      padding: 2rem;
-      position: relative;
-      transition: all 0.3s;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .ticket-card:hover { border-color: rgba(167,139,250,0.2); }
-
-    .ticket-card.featured {
-      border-color: var(--df-violet);
-      box-shadow: 0 0 40px rgba(167, 139, 250, 0.08);
-    }
-
-    .ticket-badge {
-      position: absolute;
-      top: -1px; right: -1px;
-      padding: 0.3rem 0.75rem;
-      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-radius: 0 16px 0 8px;
-    }
-
-    .ticket-tier {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--df-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .ticket-price {
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.25rem;
-    }
-
-    .ticket-amount {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2.75rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .ticket-currency {
-      font-size: 0.875rem;
-      color: var(--df-muted);
-    }
-
-    .ticket-features {
-      margin-top: 1.5rem;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-    }
-
-    .ticket-features li {
-      font-size: 0.825rem;
-      color: var(--df-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .ticket-features li::before {
-      content: '✓';
-      color: var(--df-violet);
-      font-size: 0.7rem;
-      font-weight: 700;
-    }
-
-    .ticket-btn {
-      display: block;
-      width: 100%;
-      margin-top: 1.5rem;
-      padding: 0.75rem;
-      text-align: center;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 8px;
-      border: 1px solid var(--df-glass-border);
-      background: transparent;
-      color: var(--df-text);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .ticket-btn:hover { border-color: var(--df-violet); color: var(--df-violet); }
-
-    .ticket-card.featured .ticket-btn {
-      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
-      color: #fff;
-      border: none;
-    }
-    .ticket-card.featured .ticket-btn:hover { opacity: 0.85; }
-
     /* ── Sponsors ───────────────────────────── */
     .sponsors {
       padding: 4rem 0;
@@ -666,7 +546,7 @@
     /* ── Reduced motion ────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       .hero-date, .hero-sub, .hero-cta-row, .hero-stats,
-      .hero h1 .line-inner, .timeline-item, .ticket-card, .back-hub {
+      .hero h1 .line-inner, .timeline-item, .back-hub {
         opacity: 1 !important; transform: none !important;
       }
       .timeline-dot.pulse { animation: none; }
@@ -679,10 +559,10 @@
   <nav class="nav">
     <a href="#" class="nav-logo">Dev<span>Forge</span></a>
     <ul class="nav-links">
-      <li><a href="#schedule">Schedule</a></li>
-      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#schedule">Programa</a></li>
+      <li><a href="#speakers">Ponentes</a></li>
     </ul>
-    <a href="#tickets" class="nav-cta">Get Tickets</a>
+    <a href="#schedule" class="nav-cta">Ver programa</a>
   </nav>
 
   <!-- Hero -->
@@ -692,29 +572,29 @@
     <div class="hero-grid" aria-hidden="true"></div>
 
     <div class="hero-content">
-      <div class="hero-date">June 15–17, 2026 · Berlin, Germany</div>
+      <div class="hero-date">15–17 de junio, 2026 · Berlín, Alemania</div>
       <h1>
         <span class="line"><span class="line-inner">Dev<span class="accent-v">Forge</span></span></span>
         <span class="line"><span class="line-inner accent-s">2026</span></span>
       </h1>
-      <p class="hero-sub">Three days of talks, workshops, and connections for builders who ship.</p>
+      <p class="hero-sub">Tres días de charlas, talleres y conexiones para creadores que lanzan.</p>
       <div class="hero-cta-row">
-        <a href="#tickets" class="btn-grad">Get your ticket</a>
-        <a href="#schedule" class="btn-glass">View schedule</a>
+        <a href="#schedule" class="btn-grad">Ver programa</a>
+        <a href="#speakers" class="btn-glass">Conoce a los ponentes</a>
       </div>
 
       <div class="hero-stats glass">
         <div class="hero-stat">
           <div class="hero-stat-value">3</div>
-          <div class="hero-stat-label">Days</div>
+          <div class="hero-stat-label">Días</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-value">20+</div>
-          <div class="hero-stat-label">Speakers</div>
+          <div class="hero-stat-label">Ponentes</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-value">1,500</div>
-          <div class="hero-stat-label">Attendees</div>
+          <div class="hero-stat-label">Asistentes</div>
         </div>
       </div>
     </div>
@@ -723,8 +603,8 @@
   <!-- Speakers -->
   <section class="speakers" id="speakers">
     <div class="section-header">
-      <div class="section-label">Speakers</div>
-      <h2 class="section-title">Learn from the best</h2>
+      <div class="section-label">Ponentes</div>
+      <h2 class="section-title">Aprende de los mejores</h2>
     </div>
     <div class="speakers-swiper">
       <div class="swiper">
@@ -734,7 +614,7 @@
               <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Ryan Chen" loading="lazy"></div>
               <div class="speaker-name">Ryan Chen</div>
               <div class="speaker-company">CTO, Vercel</div>
-              <div class="speaker-talk">"The Future of Edge Computing"</div>
+              <div class="speaker-talk">"El Futuro del Edge Computing"</div>
             </div>
           </div>
           <div class="swiper-slide">
@@ -742,7 +622,7 @@
               <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="Sara Mitchell" loading="lazy"></div>
               <div class="speaker-name">Sara Mitchell</div>
               <div class="speaker-company">VP Eng, Linear</div>
-              <div class="speaker-talk">"Building for Developer Experience"</div>
+              <div class="speaker-talk">"Construyendo para la Experiencia del Desarrollador"</div>
             </div>
           </div>
           <div class="swiper-slide">
@@ -750,7 +630,7 @@
               <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Alex Novak" loading="lazy"></div>
               <div class="speaker-name">Alex Novak</div>
               <div class="speaker-company">Founder, Turborepo</div>
-              <div class="speaker-talk">"Monorepos at Scale"</div>
+              <div class="speaker-talk">"Monorepos a Escala"</div>
             </div>
           </div>
           <div class="swiper-slide">
@@ -758,7 +638,7 @@
               <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80" alt="Priya Sharma" loading="lazy"></div>
               <div class="speaker-name">Priya Sharma</div>
               <div class="speaker-company">Staff Eng, Stripe</div>
-              <div class="speaker-talk">"Designing Resilient APIs"</div>
+              <div class="speaker-talk">"Diseñando APIs Resilientes"</div>
             </div>
           </div>
           <div class="swiper-slide">
@@ -766,7 +646,7 @@
               <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="Marcus Webb" loading="lazy"></div>
               <div class="speaker-name">Marcus Webb</div>
               <div class="speaker-company">Lead, Rust Foundation</div>
-              <div class="speaker-talk">"Rust in Production: Lessons Learned"</div>
+              <div class="speaker-talk">"Rust en Producción: Lecciones Aprendidas"</div>
             </div>
           </div>
         </div>
@@ -779,88 +659,41 @@
   <section class="schedule" id="schedule">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">Schedule</div>
-        <h2 class="section-title">Three days, zero filler</h2>
+        <div class="section-label">Programa</div>
+        <h2 class="section-title">Tres días, cero relleno</h2>
       </div>
 
       <div class="schedule-tabs">
-        <button class="schedule-tab active" data-day="1">Day 1</button>
-        <button class="schedule-tab" data-day="2">Day 2</button>
-        <button class="schedule-tab" data-day="3">Day 3</button>
+        <button class="schedule-tab active" data-day="1">Día 1</button>
+        <button class="schedule-tab" data-day="2">Día 2</button>
+        <button class="schedule-tab" data-day="3">Día 3</button>
       </div>
 
       <div class="schedule-day active" data-day="1">
         <div class="timeline">
-          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Opening Keynote</div><div class="timeline-speaker">Ryan Chen · The Future of Edge Computing</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30</div><div class="timeline-title">Building for DX</div><div class="timeline-speaker">Sara Mitchell · Developer Experience at Scale</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">13:00</div><div class="timeline-title">Workshop: Monorepos</div><div class="timeline-speaker">Alex Novak · Hands-on Turborepo Setup</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">15:30</div><div class="timeline-title">API Design Patterns</div><div class="timeline-speaker">Priya Sharma · Resilient APIs with Stripe</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">18:00</div><div class="timeline-title">Networking & Drinks</div><div class="timeline-speaker">Rooftop venue · All attendees</div></div>
+          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Keynote de Apertura</div><div class="timeline-speaker">Ryan Chen · El Futuro del Edge Computing</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30</div><div class="timeline-title">Construyendo para DX</div><div class="timeline-speaker">Sara Mitchell · Experiencia del Desarrollador a Escala</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">13:00</div><div class="timeline-title">Taller: Monorepos</div><div class="timeline-speaker">Alex Novak · Configuración práctica de Turborepo</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">15:30</div><div class="timeline-title">Patrones de Diseño de APIs</div><div class="timeline-speaker">Priya Sharma · APIs Resilientes con Stripe</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">18:00</div><div class="timeline-title">Networking y Bebidas</div><div class="timeline-speaker">Terraza · Todos los asistentes</div></div>
         </div>
       </div>
 
       <div class="schedule-day" data-day="2">
         <div class="timeline">
-          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Rust in Production</div><div class="timeline-speaker">Marcus Webb · Lessons from the Rust Foundation</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30</div><div class="timeline-title">AI-Assisted Development</div><div class="timeline-speaker">Panel Discussion · 4 speakers</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">13:00</div><div class="timeline-title">Workshop: CI/CD Pipelines</div><div class="timeline-speaker">Hands-on with GitHub Actions</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">16:00</div><div class="timeline-title">Lightning Talks</div><div class="timeline-speaker">8 community speakers · 5 min each</div></div>
+          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Rust en Producción</div><div class="timeline-speaker">Marcus Webb · Lecciones de la Rust Foundation</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30</div><div class="timeline-title">Desarrollo Asistido por IA</div><div class="timeline-speaker">Mesa Redonda · 4 ponentes</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">13:00</div><div class="timeline-title">Taller: Pipelines CI/CD</div><div class="timeline-speaker">Práctica con GitHub Actions</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">16:00</div><div class="timeline-title">Charlas Relámpago</div><div class="timeline-speaker">8 ponentes de la comunidad · 5 min cada uno</div></div>
         </div>
       </div>
 
       <div class="schedule-day" data-day="3">
         <div class="timeline">
-          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Unconference</div><div class="timeline-speaker">Attendee-led sessions · Open format</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">11:00</div><div class="timeline-title">Hackathon Demos</div><div class="timeline-speaker">Teams present overnight builds</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">14:00</div><div class="timeline-title">Closing Keynote</div><div class="timeline-speaker">Special guest TBA</div></div>
-          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">16:00</div><div class="timeline-title">After Party</div><div class="timeline-speaker">Live music · Food · Community</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tickets -->
-  <section class="tickets" id="tickets">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Tickets</div>
-        <h2 class="section-title">Secure your spot</h2>
-      </div>
-      <div class="tickets-grid">
-        <div class="ticket-card glass">
-          <div class="ticket-tier">Community</div>
-          <div class="ticket-price"><span class="ticket-amount">€0</span></div>
-          <ul class="ticket-features">
-            <li>All talks livestream</li>
-            <li>Discord community</li>
-            <li>Recordings after event</li>
-          </ul>
-          <button class="ticket-btn">Register free</button>
-        </div>
-        <div class="ticket-card glass featured">
-          <div class="ticket-badge">Best Value</div>
-          <div class="ticket-tier">Builder</div>
-          <div class="ticket-price"><span class="ticket-amount">€199</span></div>
-          <ul class="ticket-features">
-            <li>In-person access (3 days)</li>
-            <li>All workshops</li>
-            <li>Lunch & coffee</li>
-            <li>Networking events</li>
-            <li>Swag bag</li>
-          </ul>
-          <button class="ticket-btn">Get ticket</button>
-        </div>
-        <div class="ticket-card glass">
-          <div class="ticket-tier">VIP</div>
-          <div class="ticket-price"><span class="ticket-amount">€499</span></div>
-          <ul class="ticket-features">
-            <li>Everything in Builder</li>
-            <li>Speaker dinner access</li>
-            <li>Priority seating</li>
-            <li>1-on-1 mentoring slot</li>
-            <li>Exclusive after party</li>
-          </ul>
-          <button class="ticket-btn">Get ticket</button>
+          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Desconferencia</div><div class="timeline-speaker">Sesiones dirigidas por asistentes · Formato abierto</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">11:00</div><div class="timeline-title">Demos del Hackathon</div><div class="timeline-speaker">Equipos presentan sus builds nocturnos</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">14:00</div><div class="timeline-title">Keynote de Clausura</div><div class="timeline-speaker">Invitado especial por confirmar</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">16:00</div><div class="timeline-title">Fiesta de Cierre</div><div class="timeline-speaker">Música en vivo · Comida · Comunidad</div></div>
         </div>
       </div>
     </div>
@@ -869,7 +702,7 @@
   <!-- Sponsors -->
   <section class="sponsors">
     <div class="container">
-      <div class="sponsors-label">Supported by</div>
+      <div class="sponsors-label">Con el apoyo de</div>
       <div class="sponsors-grid">
         <span class="sponsor">Vercel</span>
         <span class="sponsor">Stripe</span>
@@ -884,15 +717,15 @@
   <footer class="footer">
     <div class="footer-brand">Dev<span>Forge</span></div>
     <ul class="footer-links">
-      <li><a href="#">Code of Conduct</a></li>
-      <li><a href="#">FAQ</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#">Código de Conducta</a></li>
+      <li><a href="#">Preguntas Frecuentes</a></li>
+      <li><a href="#">Contacto</a></li>
     </ul>
-    <span class="footer-copy">© 2026 DevForge. Berlin, Germany.</span>
+    <span class="footer-copy">© 2026 DevForge. Berlín, Alemania.</span>
   </footer>
 
   <!-- Back to hub -->
-  <a href="./index.html" class="back-hub">
+  <a href="./index.html" class="back-hub" aria-label="Volver al hub">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
     Hub
   </a>
@@ -957,11 +790,6 @@
         scrollTrigger: { trigger: '.schedule', start: 'top 75%', once: true },
       });
 
-      // Tickets
-      gsap.to('.ticket-card', {
-        opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out',
-        scrollTrigger: { trigger: '.tickets-grid', start: 'top 80%', once: true },
-      });
     }
   </script>
 
