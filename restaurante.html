@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osteria Nonna — Italian Dining, Reimagined</title>
+  <meta name="description" content="Where tradition meets craft. Seasonal Italian cuisine in an intimate setting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="./dist/css/main.css">
+  <style>
+    :root {
+      --on-bg: #1a110a;
+      --on-surface: #241a10;
+      --on-text: #f5ebe0;
+      --on-muted: #a08d7a;
+      --on-accent: #c8702a;
+      --on-gold: #d4a853;
+      --on-border: rgba(245, 235, 224, 0.08);
+      --on-border-dot: rgba(245, 235, 224, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--on-bg);
+      color: var(--on-text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    ::selection {
+      background: var(--on-accent);
+      color: #fff;
+    }
+
+    /* ── Nav ────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(26, 17, 10, 0.6);
+      border-bottom: 1px solid var(--on-border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--on-text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo em {
+      font-style: italic;
+      color: var(--on-gold);
+    }
+
+    .nav-reserve {
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--on-gold);
+      color: var(--on-gold);
+      font-family: 'Lora', serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .nav-reserve:hover {
+      background: var(--on-gold);
+      color: var(--on-bg);
+    }
+
+    /* ── Hero ───────────────────────────────── */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(26, 17, 10, 0.4) 0%,
+        rgba(26, 17, 10, 0.2) 40%,
+        rgba(26, 17, 10, 0.6) 80%,
+        rgba(26, 17, 10, 1) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--on-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: var(--on-muted);
+      font-weight: 400;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+    }
+
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-muted);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(180deg, var(--on-gold), transparent);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── Story ──────────────────────────────── */
+    .story {
+      padding: 8rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .story-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .story-text {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .story-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .story h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.15;
+    }
+
+    .story-body {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--on-muted);
+    }
+
+    .story-signature {
+      margin-top: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--on-gold);
+    }
+
+    .story-photo {
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .story-photo-inner {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+
+    .story-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-photo-frame {
+      position: absolute;
+      inset: -12px;
+      border: 1px solid var(--on-gold);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ── Decorative divider ─────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem 0;
+    }
+
+    .divider-line {
+      width: 60px;
+      height: 1px;
+      background: var(--on-border-dot);
+    }
+
+    .divider-ornament {
+      color: var(--on-gold);
+      font-size: 1rem;
+    }
+
+    /* ── Menu ───────────────────────────────── */
+    .menu {
+      padding: 6rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-gold);
+      margin-bottom: 1rem;
+    }
+
+    .menu-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .menu-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px dashed var(--on-border-dot);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .menu-item-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .menu-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .menu-item-dots {
+      flex: 1;
+      border-bottom: 1px dotted var(--on-border-dot);
+      min-width: 20px;
+      margin-bottom: 4px;
+    }
+
+    .menu-item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      color: var(--on-gold);
+      white-space: nowrap;
+    }
+
+    .menu-item-desc {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--on-muted);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── Gallery ────────────────────────────── */
+    .gallery {
+      padding: 6rem 0;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 0 2rem;
+    }
+
+    .gallery-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-gold);
+      margin-bottom: 1rem;
+    }
+
+    .gallery-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-bottom: 3rem;
+    }
+
+    .swiper-slide {
+      width: 70%;
+      max-width: 600px;
+    }
+
+    @media (max-width: 640px) {
+      .swiper-slide { width: 85%; }
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      display: block;
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--on-muted) !important;
+      opacity: 0.3 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--on-gold) !important;
+      opacity: 1 !important;
+    }
+
+    /* ── Reserve ────────────────────────────── */
+    .reserve {
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+
+    .reserve-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: scale(0.96);
+    }
+
+    .reserve-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .reserve h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.15;
+    }
+
+    .reserve-phone {
+      display: inline-block;
+      margin-top: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--on-gold);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: opacity 0.3s;
+    }
+
+    .reserve-phone:hover { opacity: 0.7; }
+
+    .reserve-hours {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--on-muted);
+      line-height: 1.8;
+    }
+
+    .reserve-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.875rem 2.5rem;
+      border: 1px solid var(--on-gold);
+      color: var(--on-gold);
+      font-family: 'Lora', serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .reserve-btn:hover {
+      background: var(--on-gold);
+      color: var(--on-bg);
+    }
+
+    /* ── Footer ─────────────────────────────── */
+    .footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--on-border);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .footer-brand em { font-style: italic; color: var(--on-gold); }
+
+    .footer-address {
+      font-size: 0.8rem;
+      color: var(--on-muted);
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-socials a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-socials a:hover { color: var(--on-gold); }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--on-muted);
+      opacity: 0.6;
+    }
+
+    /* ── Back to hub ───────────────────────── */
+    .back-hub {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      border: 1px solid var(--on-border);
+      background: rgba(26, 17, 10, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--on-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .back-hub:hover {
+      color: var(--on-text);
+      border-color: var(--on-gold);
+    }
+
+    .back-hub svg { width: 14px; height: 14px; }
+
+    /* ── Reduced motion ────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-content, .hero-scroll, .story-text, .story-photo,
+      .menu-item, .reserve-inner, .back-hub {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .hero-scroll-line { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">Osteria <em>Nonna</em></a>
+    <a href="#reserve" class="nav-reserve">Reserve a Table</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80" alt="Plated Italian dish" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tagline">Est. 1987 · Milano</div>
+      <h1>Where tradition<br>meets <em>craft</em></h1>
+      <p class="hero-sub">Seasonal Italian cuisine in an intimate setting</p>
+    </div>
+    <div class="hero-scroll">
+      <span>Discover</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story">
+    <div class="story-grid">
+      <div class="story-text">
+        <div class="story-label">Our Story</div>
+        <h2>Three generations<br>of <em>passion</em></h2>
+        <p class="story-body">
+          What began in Nonna Rosa's kitchen in 1987 has become one of the city's most cherished dining experiences. We honor her recipes while embracing the finest seasonal ingredients from local artisans. Every plate tells a story — of family, of soil, of time.
+        </p>
+        <div class="story-signature">— Nonna Rosa</div>
+      </div>
+      <div class="story-photo">
+        <div class="story-photo-inner">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Restaurant interior" loading="lazy">
+        </div>
+        <div class="story-photo-frame" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-ornament">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Menu -->
+  <section class="menu">
+    <div class="menu-header">
+      <div class="menu-label">From Our Kitchen</div>
+      <h2 class="menu-title">Seasonal <em>Highlights</em></h2>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-header">
+        <span class="menu-item-name">Burrata di Puglia</span>
+        <span class="menu-item-dots"></span>
+        <span class="menu-item-price">€18</span>
+      </div>
+      <p class="menu-item-desc">Creamy burrata, heirloom tomatoes, aged balsamic, basil oil, focaccia crumbs</p>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-header">
+        <span class="menu-item-name">Pappardelle al Ragù</span>
+        <span class="menu-item-dots"></span>
+        <span class="menu-item-price">€24</span>
+      </div>
+      <p class="menu-item-desc">Hand-rolled pappardelle, slow-braised wild boar ragù, pecorino romano, fresh thyme</p>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-header">
+        <span class="menu-item-name">Branzino al Forno</span>
+        <span class="menu-item-dots"></span>
+        <span class="menu-item-price">€32</span>
+      </div>
+      <p class="menu-item-desc">Whole roasted sea bass, capers, Taggiasca olives, cherry tomatoes, crispy potatoes</p>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-header">
+        <span class="menu-item-name">Tiramisù della Nonna</span>
+        <span class="menu-item-dots"></span>
+        <span class="menu-item-price">€14</span>
+      </div>
+      <p class="menu-item-desc">Nonna Rosa's original recipe — mascarpone, espresso-soaked savoiardi, cocoa</p>
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-ornament">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Gallery -->
+  <section class="gallery">
+    <div class="gallery-header">
+      <div class="gallery-label">Gallery</div>
+      <h2 class="gallery-title">A feast for <em>every sense</em></h2>
+    </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&q=80" alt="Fresh pasta preparation" loading="lazy">
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="Plated risotto dish" loading="lazy">
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=800&q=80" alt="Wine selection" loading="lazy">
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80" alt="Tiramisu dessert" loading="lazy">
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Reserve -->
+  <section class="reserve" id="reserve">
+    <div class="reserve-inner">
+      <div class="reserve-label">Reservations</div>
+      <h2>Reserve your<br><em>table</em></h2>
+      <a href="tel:+39024567890" class="reserve-phone">+39 02 456 7890</a>
+      <div class="reserve-hours">
+        Tuesday — Saturday: 12:00 – 15:00 · 19:00 – 23:00<br>
+        Sunday: 12:00 – 16:00<br>
+        Monday: Closed
+      </div>
+      <a href="#" class="reserve-btn">Book Online</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Osteria <em>Nonna</em></div>
+        <div class="footer-address">Via Brera 28, 20121 Milano, Italy</div>
+      </div>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TripAdvisor</a>
+      </div>
+      <div class="footer-copy">© 2026 Osteria Nonna. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Back to hub -->
+  <a href="./index.html" class="back-hub">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+    Hub
+  </a>
+
+  <!-- CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Swiper ─────────────────────────────
+    new Swiper('.swiper', {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: prefersReducedMotion ? false : { delay: 3500, disableOnInteraction: false },
+      speed: 800,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+    // ── GSAP ───────────────────────────────
+    if (!prefersReducedMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Hero bg parallax
+      gsap.to('.hero-bg img', {
+        y: 80,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      // Hero content
+      heroTl.to('.hero-content', { opacity: 1, y: 0, duration: 1 }, 0.3);
+      heroTl.to('.hero-scroll', { opacity: 1, duration: 0.6 }, 1.2);
+      heroTl.to('.back-hub', { opacity: 1, duration: 0.5 }, 1.5);
+
+      // Story text
+      gsap.to('.story-text', {
+        opacity: 1, y: 0, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: '.story-text', start: 'top 75%', once: true },
+      });
+
+      // Story photo
+      gsap.to('.story-photo', {
+        opacity: 1, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: '.story-photo', start: 'top 75%', once: true },
+      });
+
+      // Story photo parallax
+      gsap.to('.story-photo img', {
+        y: -30,
+        ease: 'none',
+        scrollTrigger: { trigger: '.story', start: 'top bottom', end: 'bottom top', scrub: 1 },
+      });
+
+      // Menu items
+      gsap.to('.menu-item', {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power2.out',
+        scrollTrigger: { trigger: '.menu', start: 'top 75%', once: true },
+      });
+
+      // Reserve
+      gsap.to('.reserve-inner', {
+        opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: '.reserve', start: 'top 70%', once: true },
+      });
+    }
+  </script>
+
+</body>
+</html>
