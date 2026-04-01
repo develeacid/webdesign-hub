@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevForge 2026 — Where Builders Converge</title>
+  <meta name="description" content="The premier developer conference. June 15-17, 2026 · Berlin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="./dist/css/main.css">
+  <style>
+    :root {
+      --df-bg: #09090f;
+      --df-text: #e4e4e7;
+      --df-muted: #71717a;
+      --df-violet: #a78bfa;
+      --df-sky: #38bdf8;
+      --df-glass-bg: rgba(255, 255, 255, 0.04);
+      --df-glass-border: rgba(255, 255, 255, 0.08);
+      --df-glass-hover: rgba(255, 255, 255, 0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--df-bg);
+      color: var(--df-text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: 'JetBrains Mono', monospace; }
+
+    ::selection { background: var(--df-violet); color: #fff; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Glass utility */
+    .glass {
+      background: var(--df-glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--df-glass-border);
+      border-radius: 16px;
+    }
+
+    /* ── Nav ────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(9, 9, 15, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--df-glass-border);
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--df-text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--df-violet); }
+
+    .nav-links {
+      display: none;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--df-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--df-violet); }
+
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: opacity 0.3s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── Hero ───────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.12), transparent 70%);
+      top: 20%; left: 30%;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.08), transparent 70%);
+      bottom: 20%; right: 20%;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--df-sky);
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .hero h1 {
+      margin-top: 1.5rem;
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 .line {
+      display: block;
+      overflow: hidden;
+    }
+    .hero h1 .line-inner {
+      display: block;
+      transform: translateY(110%);
+    }
+
+    .hero .accent-v { color: var(--df-violet); }
+    .hero .accent-s { color: var(--df-sky); }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--df-muted);
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .hero-cta-row {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .btn-grad {
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-grad:hover { box-shadow: 0 0 30px rgba(167, 139, 250, 0.3); }
+
+    .btn-glass {
+      padding: 0.8rem 2rem;
+      background: var(--df-glass-bg);
+      border: 1px solid var(--df-glass-border);
+      color: var(--df-text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-glass:hover { background: var(--df-glass-hover); border-color: rgba(167, 139, 250, 0.2); }
+
+    /* Hero stats */
+    .hero-stats {
+      margin-top: 3.5rem;
+      display: inline-flex;
+      gap: 0;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-stat {
+      padding: 1.25rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--df-glass-border);
+    }
+    .hero-stat:last-child { border-right: none; }
+
+    .hero-stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      color: var(--df-muted);
+      margin-top: 0.25rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Speakers ───────────────────────────── */
+    .speakers {
+      padding: 6rem 0;
+      border-top: 1px solid var(--df-glass-border);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--df-violet);
+    }
+
+    .section-title {
+      margin-top: 0.75rem;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .speakers-swiper {
+      padding: 0 2rem 3rem;
+    }
+
+    .speakers-swiper .swiper-slide {
+      width: 280px;
+    }
+
+    .speaker-card {
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .speaker-card:hover { border-color: rgba(167, 139, 250, 0.2); }
+
+    .speaker-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 2px solid var(--df-glass-border);
+    }
+
+    .speaker-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .speaker-name {
+      margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .speaker-company {
+      font-size: 0.75rem;
+      color: var(--df-sky);
+      margin-top: 0.25rem;
+    }
+
+    .speaker-talk {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--df-muted);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .speakers-swiper .swiper-pagination-bullet {
+      background: var(--df-muted) !important;
+      opacity: 0.3 !important;
+    }
+    .speakers-swiper .swiper-pagination-bullet-active {
+      background: var(--df-violet) !important;
+      opacity: 1 !important;
+    }
+
+    /* ── Schedule ───────────────────────────── */
+    .schedule {
+      padding: 6rem 0;
+      border-top: 1px solid var(--df-glass-border);
+    }
+
+    .schedule-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .schedule-tab {
+      padding: 0.5rem 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--df-muted);
+      background: transparent;
+      border: 1px solid var(--df-glass-border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .schedule-tab:hover { color: var(--df-text); border-color: rgba(167,139,250,0.2); }
+    .schedule-tab.active {
+      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .schedule-day { display: none; }
+    .schedule-day.active { display: block; }
+
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--df-violet), var(--df-sky), transparent);
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 1.25rem 0 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--df-glass-border);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 1.6rem;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--df-violet);
+      background: var(--df-bg);
+    }
+
+    .timeline-dot.pulse {
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(167,139,250,0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(167,139,250,0); }
+    }
+
+    .timeline-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--df-sky);
+      letter-spacing: 0.06em;
+    }
+
+    .timeline-title {
+      margin-top: 0.375rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .timeline-speaker {
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+      color: var(--df-muted);
+    }
+
+    /* ── Tickets ────────────────────────────── */
+    .tickets {
+      padding: 6rem 0;
+      border-top: 1px solid var(--df-glass-border);
+    }
+
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .ticket-card {
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .ticket-card:hover { border-color: rgba(167,139,250,0.2); }
+
+    .ticket-card.featured {
+      border-color: var(--df-violet);
+      box-shadow: 0 0 40px rgba(167, 139, 250, 0.08);
+    }
+
+    .ticket-badge {
+      position: absolute;
+      top: -1px; right: -1px;
+      padding: 0.3rem 0.75rem;
+      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 0 16px 0 8px;
+    }
+
+    .ticket-tier {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--df-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .ticket-price {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .ticket-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .ticket-currency {
+      font-size: 0.875rem;
+      color: var(--df-muted);
+    }
+
+    .ticket-features {
+      margin-top: 1.5rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .ticket-features li {
+      font-size: 0.825rem;
+      color: var(--df-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ticket-features li::before {
+      content: '✓';
+      color: var(--df-violet);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .ticket-btn {
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 0.75rem;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid var(--df-glass-border);
+      background: transparent;
+      color: var(--df-text);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .ticket-btn:hover { border-color: var(--df-violet); color: var(--df-violet); }
+
+    .ticket-card.featured .ticket-btn {
+      background: linear-gradient(135deg, var(--df-violet), var(--df-sky));
+      color: #fff;
+      border: none;
+    }
+    .ticket-card.featured .ticket-btn:hover { opacity: 0.85; }
+
+    /* ── Sponsors ───────────────────────────── */
+    .sponsors {
+      padding: 4rem 0;
+      border-top: 1px solid var(--df-glass-border);
+      text-align: center;
+    }
+
+    .sponsors-label {
+      font-size: 0.7rem;
+      color: var(--df-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .sponsors-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+
+    .sponsor {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--df-muted);
+      opacity: 0.4;
+      letter-spacing: 0.04em;
+      transition: opacity 0.3s;
+    }
+    .sponsor:hover { opacity: 0.8; }
+
+    /* ── Footer ─────────────────────────────── */
+    .footer {
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--df-glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .footer-brand span { color: var(--df-violet); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.7rem;
+      color: var(--df-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--df-violet); }
+
+    .footer-copy {
+      font-size: 0.65rem;
+      color: var(--df-muted);
+      opacity: 0.5;
+    }
+
+    /* ── Back to hub ───────────────────────── */
+    .back-hub {
+      position: fixed;
+      bottom: 1.5rem; left: 1.5rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      border-radius: 10px;
+      background: rgba(9, 9, 15, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--df-glass-border);
+      color: var(--df-muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: all 0.3s;
+      opacity: 0;
+    }
+    .back-hub:hover { color: var(--df-violet); border-color: rgba(167,139,250,0.3); }
+    .back-hub svg { width: 14px; height: 14px; }
+
+    /* ── Reduced motion ────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-date, .hero-sub, .hero-cta-row, .hero-stats,
+      .hero h1 .line-inner, .timeline-item, .ticket-card, .back-hub {
+        opacity: 1 !important; transform: none !important;
+      }
+      .timeline-dot.pulse { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">Dev<span>Forge</span></a>
+    <ul class="nav-links">
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+    </ul>
+    <a href="#tickets" class="nav-cta">Get Tickets</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-date">June 15–17, 2026 · Berlin, Germany</div>
+      <h1>
+        <span class="line"><span class="line-inner">Dev<span class="accent-v">Forge</span></span></span>
+        <span class="line"><span class="line-inner accent-s">2026</span></span>
+      </h1>
+      <p class="hero-sub">Three days of talks, workshops, and connections for builders who ship.</p>
+      <div class="hero-cta-row">
+        <a href="#tickets" class="btn-grad">Get your ticket</a>
+        <a href="#schedule" class="btn-glass">View schedule</a>
+      </div>
+
+      <div class="hero-stats glass">
+        <div class="hero-stat">
+          <div class="hero-stat-value">3</div>
+          <div class="hero-stat-label">Days</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">20+</div>
+          <div class="hero-stat-label">Speakers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">1,500</div>
+          <div class="hero-stat-label">Attendees</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speakers -->
+  <section class="speakers" id="speakers">
+    <div class="section-header">
+      <div class="section-label">Speakers</div>
+      <h2 class="section-title">Learn from the best</h2>
+    </div>
+    <div class="speakers-swiper">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="speaker-card glass">
+              <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Ryan Chen" loading="lazy"></div>
+              <div class="speaker-name">Ryan Chen</div>
+              <div class="speaker-company">CTO, Vercel</div>
+              <div class="speaker-talk">"The Future of Edge Computing"</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="speaker-card glass">
+              <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="Sara Mitchell" loading="lazy"></div>
+              <div class="speaker-name">Sara Mitchell</div>
+              <div class="speaker-company">VP Eng, Linear</div>
+              <div class="speaker-talk">"Building for Developer Experience"</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="speaker-card glass">
+              <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Alex Novak" loading="lazy"></div>
+              <div class="speaker-name">Alex Novak</div>
+              <div class="speaker-company">Founder, Turborepo</div>
+              <div class="speaker-talk">"Monorepos at Scale"</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="speaker-card glass">
+              <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80" alt="Priya Sharma" loading="lazy"></div>
+              <div class="speaker-name">Priya Sharma</div>
+              <div class="speaker-company">Staff Eng, Stripe</div>
+              <div class="speaker-talk">"Designing Resilient APIs"</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="speaker-card glass">
+              <div class="speaker-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="Marcus Webb" loading="lazy"></div>
+              <div class="speaker-name">Marcus Webb</div>
+              <div class="speaker-company">Lead, Rust Foundation</div>
+              <div class="speaker-talk">"Rust in Production: Lessons Learned"</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section class="schedule" id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Schedule</div>
+        <h2 class="section-title">Three days, zero filler</h2>
+      </div>
+
+      <div class="schedule-tabs">
+        <button class="schedule-tab active" data-day="1">Day 1</button>
+        <button class="schedule-tab" data-day="2">Day 2</button>
+        <button class="schedule-tab" data-day="3">Day 3</button>
+      </div>
+
+      <div class="schedule-day active" data-day="1">
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Opening Keynote</div><div class="timeline-speaker">Ryan Chen · The Future of Edge Computing</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30</div><div class="timeline-title">Building for DX</div><div class="timeline-speaker">Sara Mitchell · Developer Experience at Scale</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">13:00</div><div class="timeline-title">Workshop: Monorepos</div><div class="timeline-speaker">Alex Novak · Hands-on Turborepo Setup</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">15:30</div><div class="timeline-title">API Design Patterns</div><div class="timeline-speaker">Priya Sharma · Resilient APIs with Stripe</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">18:00</div><div class="timeline-title">Networking & Drinks</div><div class="timeline-speaker">Rooftop venue · All attendees</div></div>
+        </div>
+      </div>
+
+      <div class="schedule-day" data-day="2">
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Rust in Production</div><div class="timeline-speaker">Marcus Webb · Lessons from the Rust Foundation</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30</div><div class="timeline-title">AI-Assisted Development</div><div class="timeline-speaker">Panel Discussion · 4 speakers</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">13:00</div><div class="timeline-title">Workshop: CI/CD Pipelines</div><div class="timeline-speaker">Hands-on with GitHub Actions</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">16:00</div><div class="timeline-title">Lightning Talks</div><div class="timeline-speaker">8 community speakers · 5 min each</div></div>
+        </div>
+      </div>
+
+      <div class="schedule-day" data-day="3">
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-dot pulse"></div><div class="timeline-time">09:00</div><div class="timeline-title">Unconference</div><div class="timeline-speaker">Attendee-led sessions · Open format</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">11:00</div><div class="timeline-title">Hackathon Demos</div><div class="timeline-speaker">Teams present overnight builds</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">14:00</div><div class="timeline-title">Closing Keynote</div><div class="timeline-speaker">Special guest TBA</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">16:00</div><div class="timeline-title">After Party</div><div class="timeline-speaker">Live music · Food · Community</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tickets -->
+  <section class="tickets" id="tickets">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Tickets</div>
+        <h2 class="section-title">Secure your spot</h2>
+      </div>
+      <div class="tickets-grid">
+        <div class="ticket-card glass">
+          <div class="ticket-tier">Community</div>
+          <div class="ticket-price"><span class="ticket-amount">€0</span></div>
+          <ul class="ticket-features">
+            <li>All talks livestream</li>
+            <li>Discord community</li>
+            <li>Recordings after event</li>
+          </ul>
+          <button class="ticket-btn">Register free</button>
+        </div>
+        <div class="ticket-card glass featured">
+          <div class="ticket-badge">Best Value</div>
+          <div class="ticket-tier">Builder</div>
+          <div class="ticket-price"><span class="ticket-amount">€199</span></div>
+          <ul class="ticket-features">
+            <li>In-person access (3 days)</li>
+            <li>All workshops</li>
+            <li>Lunch & coffee</li>
+            <li>Networking events</li>
+            <li>Swag bag</li>
+          </ul>
+          <button class="ticket-btn">Get ticket</button>
+        </div>
+        <div class="ticket-card glass">
+          <div class="ticket-tier">VIP</div>
+          <div class="ticket-price"><span class="ticket-amount">€499</span></div>
+          <ul class="ticket-features">
+            <li>Everything in Builder</li>
+            <li>Speaker dinner access</li>
+            <li>Priority seating</li>
+            <li>1-on-1 mentoring slot</li>
+            <li>Exclusive after party</li>
+          </ul>
+          <button class="ticket-btn">Get ticket</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsors -->
+  <section class="sponsors">
+    <div class="container">
+      <div class="sponsors-label">Supported by</div>
+      <div class="sponsors-grid">
+        <span class="sponsor">Vercel</span>
+        <span class="sponsor">Stripe</span>
+        <span class="sponsor">GitHub</span>
+        <span class="sponsor">Cloudflare</span>
+        <span class="sponsor">Linear</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">Dev<span>Forge</span></div>
+    <ul class="footer-links">
+      <li><a href="#">Code of Conduct</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 DevForge. Berlin, Germany.</span>
+  </footer>
+
+  <!-- Back to hub -->
+  <a href="./index.html" class="back-hub">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+    Hub
+  </a>
+
+  <!-- CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Schedule tabs ──────────────────────
+    document.querySelectorAll('.schedule-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.schedule-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.schedule-day').forEach(d => d.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelector(`.schedule-day[data-day="${tab.dataset.day}"]`).classList.add('active');
+
+        // Re-animate timeline items
+        if (!prefersReducedMotion) {
+          const items = document.querySelectorAll('.schedule-day.active .timeline-item');
+          gsap.fromTo(items, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' });
+        }
+      });
+    });
+
+    // ── Swiper speakers ────────────────────
+    new Swiper('.speakers-swiper .swiper', {
+      slidesPerView: 'auto',
+      centeredSlides: false,
+      spaceBetween: 16,
+      loop: true,
+      autoplay: prefersReducedMotion ? false : { delay: 3000, disableOnInteraction: false },
+      speed: 700,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: {
+        768: { slidesPerView: 3, centeredSlides: false },
+      },
+    });
+
+    // ── GSAP ───────────────────────────────
+    if (!prefersReducedMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      heroTl.to('.hero-date', { opacity: 1, y: 0, duration: 0.7 }, 0.2);
+      heroTl.to('.hero h1 .line-inner', { y: 0, duration: 1.1, stagger: 0.15 }, 0.4);
+      heroTl.to('.hero-sub', { opacity: 1, y: 0, duration: 0.8 }, 1.0);
+      heroTl.to('.hero-cta-row', { opacity: 1, y: 0, duration: 0.7 }, 1.2);
+      heroTl.to('.hero-stats', { opacity: 1, y: 0, duration: 0.8 }, 1.4);
+      heroTl.to('.back-hub', { opacity: 1, duration: 0.5 }, 1.7);
+
+      // Orb drift
+      gsap.to('.hero-orb-1', { x: 30, y: -20, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to('.hero-orb-2', { x: -40, y: 25, duration: 10, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+      // Timeline items
+      gsap.to('.schedule-day.active .timeline-item', {
+        opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out',
+        scrollTrigger: { trigger: '.schedule', start: 'top 75%', once: true },
+      });
+
+      // Tickets
+      gsap.to('.ticket-card', {
+        opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out',
+        scrollTrigger: { trigger: '.tickets-grid', start: 'top 80%', once: true },
+      });
+    }
+  </script>
+
+</body>
+</html>
